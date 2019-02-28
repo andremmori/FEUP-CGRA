@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.parallelogram = new MyParallelogram(this);
         this.triangleSmall = new MyTriangleSmall(this);
         this.triangleBig = new MyTriangleBig(this);
+        this.tangram = new MyTangram(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -38,8 +39,8 @@ class MyScene extends CGFscene {
         this.displayParallelogram = false;
         this.displayTriangleSmall = false;
         this.displayTriangleBig = false;
+        this.displayTangram = false;
         this.scaleFactor = 1;
-        this.rotateFactor = 0;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -84,30 +85,60 @@ class MyScene extends CGFscene {
         
         
         // ---- BEGIN Primitive drawing section
-        // BLUE
-        this.pushMatrix();
-        this.rotate(convertAng(180), 0, 0, 1);
-        this.translate(0,-2,0);
-        this.triangleBig.display();
-        this.popMatrix();
-        // PINK
-        this.pushMatrix();
-        this.translate(1,3,0);
-        this.scale(Math.sqrt(2)/2, Math.sqrt(2)/2, Math.sqrt(2)/2);
-        this.rotate(convertAng(-135), 0, 0, 1);
-        this.triangleBig.display();
-        this.popMatrix();
-        // ORANGE
-        this.pushMatrix();
-        this.rotate(convertAng(-135), 0, 0, 1);
-        this.triangleBig.display();
-        this.popMatrix();
-        // GREEN
-        this.pushMatrix();
-        this.rotate(convertAng(20), 0 , 0, 1);
-        this.translate(0,3,0);
-        this.diamond.display();
-        
+        if(this.displayTangram){
+            // BLUE
+            this.pushMatrix();
+            this.rotate(convertAng(180), 0, 0, 1);
+            this.translate(0,-2,0);
+            this.triangleBig.display();
+            this.popMatrix();
+            // PINK
+            this.pushMatrix();
+            this.translate(1,3,0);
+            this.scale(Math.sqrt(2)/2, Math.sqrt(2)/2, Math.sqrt(2)/2);
+            this.rotate(convertAng(-135), 0, 0, 1);
+            this.triangleBig.display();
+            this.popMatrix();
+            // ORANGE
+            this.pushMatrix();
+            this.rotate(convertAng(-135), 0, 0, 1);
+            this.triangleBig.display();
+            this.popMatrix();
+            // GREEN
+            this.pushMatrix();
+            this.translate(-0.3335,2.9,0);
+            this.rotate(convertAng(20), 0 , 0, 1);
+            this.diamond.display();
+            this.popMatrix();
+            // YELLOW
+            this.pushMatrix();
+            this.translate(1.40,-1.40,0);
+            this.scale(1,-1,1);
+            this.rotate(convertAng(135), 0, 0, 1);
+            this.parallelogram.display();
+            this.popMatrix();
+            // RED
+            this.pushMatrix();
+            this.translate(-1.9, -1.9, 0);
+            this.rotate(convertAng(45), 0, 0, 1);
+            this.triangleSmall.display();
+            this.popMatrix();
+            // PURPLE
+            this.pushMatrix();
+            this.translate(-1.45, -3.5 ,0);
+            this.rotate(convertAng(45), 0, 0, 1);
+            this.triangleSmall.display();
+        }
+        if (this.displayDiamond)
+            this.diamond.display();
+        if (this.displayTriangle)
+            this.triangle.display();
+        if (this.displayParallelogram)
+            this.parallelogram.display();
+        if (this.displayTriangleSmall)
+            this.triangleSmall.display();
+        if (this.displayTriangleBig)
+            this.triangleBig.display();      
         
         
         // ---- END Primitive drawing section
