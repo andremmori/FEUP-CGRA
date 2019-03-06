@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.triangleSmall = new MyTriangleSmall(this);
         this.triangleBig = new MyTriangleBig(this);
         this.tangram = new MyTangram(this);
+        this.cube = new MyUnitCube(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -40,6 +41,7 @@ class MyScene extends CGFscene {
         this.displayTriangleSmall = false;
         this.displayTriangleBig = false;
         this.displayTangram = false;
+        this.displayCube = false;
         this.scaleFactor = 1;
     }
     initLights() {
@@ -85,6 +87,8 @@ class MyScene extends CGFscene {
         
         
         // ---- BEGIN Primitive drawing section
+        if(this.displayCube)
+            this.cube.display();
         if(this.displayTangram){
             // BLUE
             this.pushMatrix();
