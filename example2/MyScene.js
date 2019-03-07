@@ -25,11 +25,17 @@ class MyScene extends CGFscene {
         this.plane = new MyPlane(this, 5);
         this.cone = new MyCone(this, 3, 1);
         this.pyramid = new MyPyramid(this, 3, 1);
+        this.tangram = new MyTangram(this);
+        this.cube = new MyUnitCube(this);
+        this.triangleBig = new MyTriangleBig(this);
+        this.triangleSmall = new MyTriangleSmall(this);
+        this.parallelogram = new MyParallelogram(this);
+        this.diamond = new MyDiamond(this);
         
-        this.objects = [this.plane, this.pyramid, this.cone];
+        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube, this.triangleSmall];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2};
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4, 'Test': 5};
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -38,11 +44,12 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
+        this.ambientLight = 0.5;
 
     }
     initLights() {
         this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
-
+        
         this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
@@ -96,6 +103,10 @@ class MyScene extends CGFscene {
 
     updateObjectComplexity(){
         this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    }
+
+    updateAmbientLight(){
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1);
     }
 
 

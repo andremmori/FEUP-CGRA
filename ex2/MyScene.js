@@ -1,7 +1,3 @@
-function convertAng(ang){
-    return (Math.PI*ang/180);
-}
-
 /**
 * MyScene
 * @constructor
@@ -90,48 +86,7 @@ class MyScene extends CGFscene {
         if(this.displayCube)
             this.cube.display();
         if(this.displayTangram){
-            // BLUE
-            this.pushMatrix();
-            this.rotate(convertAng(180), 0, 0, 1);
-            this.translate(0,-2,0);
-            this.triangleBig.display();
-            this.popMatrix();
-            // PINK
-            this.pushMatrix();
-            this.translate(1,3,0);
-            this.scale(Math.sqrt(2)/2, Math.sqrt(2)/2, Math.sqrt(2)/2);
-            this.rotate(convertAng(-135), 0, 0, 1);
-            this.triangleBig.display();
-            this.popMatrix();
-            // ORANGE
-            this.pushMatrix();
-            this.rotate(convertAng(-135), 0, 0, 1);
-            this.triangleBig.display();
-            this.popMatrix();
-            // GREEN
-            this.pushMatrix();
-            this.translate(-0.3335,2.9,0);
-            this.rotate(convertAng(20), 0 , 0, 1);
-            this.diamond.display();
-            this.popMatrix();
-            // YELLOW
-            this.pushMatrix();
-            this.translate(1.40,-1.40,0);
-            this.scale(1,-1,1);
-            this.rotate(convertAng(135), 0, 0, 1);
-            this.parallelogram.display();
-            this.popMatrix();
-            // RED
-            this.pushMatrix();
-            this.translate(-1.9, -1.9, 0);
-            this.rotate(convertAng(45), 0, 0, 1);
-            this.triangleSmall.display();
-            this.popMatrix();
-            // PURPLE
-            this.pushMatrix();
-            this.translate(-1.45, -3.5 ,0);
-            this.rotate(convertAng(45), 0, 0, 1);
-            this.triangleSmall.display();
+            this.tangram.display();
         }
         if (this.displayDiamond)
             this.diamond.display();
