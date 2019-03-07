@@ -23,6 +23,13 @@ class MyDiamond extends CGFobject {
 		];
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
+
+		this.normals = [
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+			0, 0, 1,
+		]
 	}
 }
 

@@ -32,10 +32,10 @@ class MyScene extends CGFscene {
         this.parallelogram = new MyParallelogram(this);
         this.diamond = new MyDiamond(this);
         
-        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube, this.triangleSmall];
+        this.objects = [this.plane, this.pyramid, this.cone, this.tangram, this.cube];
 
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4, 'Test': 5};
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2, 'Tangram': 3, 'Cube': 4};
 
         //Other variables connected to MyInterface
         this.selectedObject = 0;
@@ -43,7 +43,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
         this.objectComplexity = 0.5;
-        this.scaleFactor = 2.0;
+        this.scaleFactor = 1.0;
         this.ambientLight = 0.5;
 
     }
