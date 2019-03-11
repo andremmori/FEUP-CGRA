@@ -86,7 +86,12 @@ class MyScene extends CGFscene {
         if(this.displayCube)
             this.cube.display();
         if(this.displayTangram){
+            this.pushMatrix();
+            this.scale(0.5, 0.5, 0.5);
+            this.translate(4.25, 0, 4.25);
+            this.rotate((Math.PI * 90 / 180), -1, 0, 0);
             this.tangram.display();
+            this.popMatrix();
         }
         if (this.displayDiamond)
             this.diamond.display();
@@ -102,4 +107,8 @@ class MyScene extends CGFscene {
         
         // ---- END Primitive drawing section
     }
+    convertAng(ang) {
+        return (Math.PI * ang / 180);
+    }
+    
 }
