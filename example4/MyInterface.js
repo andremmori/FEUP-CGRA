@@ -18,6 +18,9 @@ class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        //Checkbox hide Quad
+        this.gui.add(this.scene, 'displayQuad').name('Display Quad');
+        this.gui.add(this.scene, 'displayTangram').name('Display Tangram');
 
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));
@@ -38,6 +41,15 @@ class MyInterface extends CGFinterface {
         var f3 = this.gui.addFolder('Bottom Right Coords')
         f3.add(this.scene.texCoords, '2', -5.0, 5.0, 0.1).name('S Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
         f3.add(this.scene.texCoords, '3', -5.0, 5.0, 0.1).name('T Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
+
+
+        // Custom material
+        var f2 = this.gui.addFolder('Custom Material');
+
+        f2.addColor(this.scene.customMaterialValues, 'Ambient').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        f2.addColor(this.scene.customMaterialValues, 'Diffuse').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        f2.addColor(this.scene.customMaterialValues, 'Specular').onChange(this.scene.updateCustomMaterial.bind(this.scene));
+        f2.add(this.scene.customMaterialValues, 'Shininess', 0, 100).onChange(this.scene.updateCustomMaterial.bind(this.scene));
 
         return true;
     }

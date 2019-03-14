@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -24,6 +25,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
+        this.tangram = new MyTangram(this);
 
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
@@ -43,6 +45,8 @@ class MyScene extends CGFscene {
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayQuad = false;
+        this.displayTangram = false;
         this.scaleFactor = 5;
         this.selectedTexture = -1;        
         this.wrapS = 0;
@@ -91,6 +95,57 @@ class MyScene extends CGFscene {
         this.quad.updateTexCoords(this.texCoords);
     }
 
+    hexToRgbA(hex) {
+        var ret;
+        //either we receive a html/css color or a RGB vector
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+            ret = [
+                parseInt(hex.substring(1, 3), 16).toPrecision() / 255.0,
+                parseInt(hex.substring(3, 5), 16).toPrecision() / 255.0,
+                parseInt(hex.substring(5, 7), 16).toPrecision() / 255.0,
+                1.0
+            ];
+        }
+        else
+            ret = [
+                hex[0].toPrecision() / 255.0,
+                hex[1].toPrecision() / 255.0,
+                hex[2].toPrecision() / 255.0,
+                1.0
+            ];
+        return ret;
+    }
+
+    updateCustomMaterial() {
+        var rgba;
+
+        this.customMaterial.setAmbient(...this.hexToRgbA(this.customMaterialValues['Ambient']));
+        this.customMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Diffuse']));
+        this.customMaterial.setSpecular(...this.hexToRgbA(this.customMaterialValues['Specular']));
+
+        this.customMaterial.setShininess(this.customMaterialValues['Shininess']);
+
+    };
+
+    initMaterials(){
+
+        this.customMaterialValues = {
+            'Ambient': '#0000ff',
+            'Diffuse': '#ff0000',
+            'Specular': '#000000',
+            'Shininess': 10
+        }
+        this.customMaterial = new CGFappearance(this);
+
+        this.updateCustomMaterial();
+
+        this.materials = [this.customMaterial];
+
+        // Labels and ID's for object selection on MyInterface
+        this.materialIDs = { 'Custom': 0};
+
+    }
+
     display() {
   
         // ---- BEGIN Background, camera and axis setup
@@ -121,8 +176,14 @@ class MyScene extends CGFscene {
         
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
-        this.quad.display();
-
+        if(this.displayQuad)
+            this.quad.display();
+        if(this.displayTangram){
+            this.pushMatrix();
+            this.scale(0.2,0.2,0.2);
+            this.tangram.display();
+            this.popMatrix();
+        }
         // ---- END Primitive drawing section
     }
 }
