@@ -21,15 +21,16 @@ class MyTriangleBig extends CGFobject {
             // inverter para aparecer do outro lado
             2, 1, 0,
         ];
-        
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
 
         this.normals = [
             0, 0, 1,
             0, 0, 1,
             0, 0, 1,
         ];
+
+             
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
     }
 }
 

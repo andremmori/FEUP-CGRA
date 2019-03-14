@@ -29,12 +29,6 @@ class MyTangram extends CGFobject {
         this.colorOrange.setSpecular(1, 0.61, 0.003, 1);
         this.colorOrange.setShininess(50.0);
 
-        this.colorGreen = new CGFappearance(this.scene);
-        this.colorGreen.setAmbient(0, 1, 0.004, 1);
-        this.colorGreen.setDiffuse(0, 1, 0.004, 1);
-        this.colorGreen.setSpecular(0, 1, 0.004, 1);
-        this.colorGreen.setShininess(50.0);
-
         this.colorYellow = new CGFappearance(this.scene);
         this.colorYellow.setAmbient(1, 1, 0.004, 1);
         this.colorYellow.setDiffuse(1, 1, 0.004, 1);

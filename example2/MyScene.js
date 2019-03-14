@@ -143,9 +143,9 @@ class MyScene extends CGFscene {
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
         this.customMaterialValues = {
-            'Ambient': '#0000ff',
-            'Diffuse': '#ff0000',
-            'Specular': '#000000',
+            'Ambient': '#00FF01',
+            'Diffuse': '#00FF01',
+            'Specular': '#00FF01',
             'Shininess': 10
         }
         this.customMaterial = new CGFappearance(this);
