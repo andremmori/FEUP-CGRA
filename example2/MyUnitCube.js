@@ -18,6 +18,25 @@ class MyUnitCube extends CGFobject {
             0.5, -0.5, 0.5,		//inferior direito frente		5
             0.5, 0.5, -0.5,		//superior direito tras			6
             0.5, 0.5, 0.5,		//superior direito frente		7
+            //Para Normais
+            -0.5, -0.5, -0.5,	//inferior esquerdo tras		0
+            -0.5, -0.5, 0.5,	//inferior esquerdo frente		1
+            -0.5, 0.5, -0.5,	//superior esquerdo tras		2
+            -0.5, 0.5, 0.5,		//superior esquerdo frente		3
+            0.5, -0.5, -0.5,	//inferior direito tras			4
+            0.5, -0.5, 0.5,		//inferior direito frente		5
+            0.5, 0.5, -0.5,		//superior direito tras			6
+            0.5, 0.5, 0.5,		//superior direito frente		7
+
+            -0.5, -0.5, -0.5,	//inferior esquerdo tras		0
+            -0.5, -0.5, 0.5,	//inferior esquerdo frente		1
+            -0.5, 0.5, -0.5,	//superior esquerdo tras		2
+            -0.5, 0.5, 0.5,		//superior esquerdo frente		3
+            0.5, -0.5, -0.5,	//inferior direito tras			4
+            0.5, -0.5, 0.5,		//inferior direito frente		5
+            0.5, 0.5, -0.5,		//superior direito tras			6
+            0.5, 0.5, 0.5,		//superior direito frente		7
+
         ];
 
         //Counter-clockwise reference of vertices
@@ -41,6 +60,37 @@ class MyUnitCube extends CGFobject {
             5, 3, 1,
             5, 7, 3,
         ];
+
+        this.normals = [
+			0, 0, -1,
+			0, 0, 1,
+			0, 0, -1,
+			0, 0, 1,
+			0, 0, -1,
+			0, 0, 1,
+			0, 0, -1,
+            0, 0, 1,
+            
+            -1, 0, 0,
+            -1, 0, 0,
+            -1, 0, 0,
+            -1, 0, 0,
+            1, 0, 0,
+            1, 0, 0,
+            1, 0, 0,
+            1, 0, 0,
+
+            0, -1, 0,
+            0, -1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, -1, 0,
+            0, -1, 0,
+            0, 1, 0,
+            0, 1, 0,
+
+		]
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
