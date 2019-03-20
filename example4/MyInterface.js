@@ -20,6 +20,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
         //Checkbox hide Quad
         this.gui.add(this.scene, 'displayQuad').name('Display Quad');
+        this.gui.add(this.scene, 'displayCubeQuad').name('Display CubeQuad');
         this.gui.add(this.scene, 'displayTangram').name('Display Tangram');
 
         //Dropdown for textures
