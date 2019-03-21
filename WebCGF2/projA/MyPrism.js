@@ -27,48 +27,30 @@ class MyPrism extends CGFobject {
             for (let j = 0; j < this.stacks; j++) {
 
                 this.vertices.push(
-                    ca, sa, j * step,
-                    caa, saa, j * step,
-                    ca, sa, (j + 1) * step,
-                    caa, saa, (j + 1) * step
+                    ca, (j + 1) * step, -sa,
+                    ca, j * step, -sa,
+                    caa, (j + 1) * step, -saa,
+                    caa, j * step, -saa,
                 );
 
-                
+
                 this.indices.push(
-                    4 * i * this.stacks + 4 * j + 0, 4 * i * this.stacks + 4 * j + 1, 4 * i * this.stacks + 4 * j + 2, 
+                    4 * i * this.stacks + 4 * j + 0, 4 * i * this.stacks + 4 * j + 1, 4 * i * this.stacks + 4 * j + 2,
                     4 * i * this.stacks + 4 * j + 3, 4 * i * this.stacks + 4 * j + 2, 4 * i * this.stacks + 4 * j + 1
-                ); 
+                );
 
+                this.normals.push(
+                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2), 
+                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2), 
+                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2), 
+                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2), 
+                );
             }
-
-            // triangle normal computed by cross product of two edges
-            var normal = [
-                saa - sa,
-                ca * saa - sa * caa,
-                caa - ca
-            ];
-
-            // normalization
-            var nsize = Math.sqrt(
-                normal[0] * normal[0] +
-                normal[1] * normal[1] +
-                normal[2] * normal[2]
-            );
-            normal[0] /= nsize;
-            normal[1] /= nsize;
-            normal[2] /= nsize;
-
-            // push normal once for each vertex of this triangle
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-
-           
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    }
+    };
 
     updateBuffers(complexity) {
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12

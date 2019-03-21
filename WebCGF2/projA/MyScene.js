@@ -21,10 +21,10 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.prism = new MyPrism(this, 8 , 20);
+        this.prism = new MyPrism(this, 3 , 2);
         
         //Objects connected to MyInterface
-        //this.objects[this.prism];
+        
         
         //Other variables connected to MyInterface
         this.displayAxis = true;
@@ -61,11 +61,13 @@ class MyScene extends CGFscene {
         // Draw axis
         if(this.displayAxis)
             this.axis.display();
-        if(this.displayNormals)
-            this.objects[this.selectedObject].enableNormalViz();
+       
 
         if(this.displayPrism)
             this.prism.display();
+        if(this.displayNormals)
+            this.prism.enableNormalViz();
+        else this.prism.disableNormalViz();
 
         //Apply default appearance
         this.setDefaultAppearance();
