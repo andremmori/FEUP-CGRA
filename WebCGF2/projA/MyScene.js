@@ -21,8 +21,16 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-
+        this.prism = new MyPrism(this, 8 , 20);
+        
         //Objects connected to MyInterface
+        //this.objects[this.prism];
+        
+        //Other variables connected to MyInterface
+        this.displayAxis = true;
+        this.displayNormals = false;
+
+        this.displayPrism = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -51,7 +59,13 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        if(this.displayAxis)
+            this.axis.display();
+        if(this.displayNormals)
+            this.objects[this.selectedObject].enableNormalViz();
+
+        if(this.displayPrism)
+            this.prism.display();
 
         //Apply default appearance
         this.setDefaultAppearance();

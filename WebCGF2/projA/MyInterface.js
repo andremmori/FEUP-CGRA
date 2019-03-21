@@ -15,6 +15,13 @@ class MyInterface extends CGFinterface {
         this.gui = new dat.GUI();
         
         var obj = this;
+        
+        // Displays
+        this.gui.add(this.scene, 'displayAxis').name("Display axis");
+        this.gui.add(this.scene, 'displayNormals').name("Display normals");
+
+        // Objects
+        this.gui.add(this.scene, 'displayPrism').name("Display Prism");
 
         return true;
     }
