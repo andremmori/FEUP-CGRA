@@ -40,10 +40,10 @@ class MyCylinder extends CGFobject {
                 );
 
                 this.normals.push(
-                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2),
-                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2),
-                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2),
-                    Math.cos(alphaAng * i + alphaAng / 2), 0, -Math.sin(alphaAng * i + alphaAng / 2),
+                    Math.cos(alphaAng * i), 0, -Math.sin(alphaAng * i),
+                    Math.cos(alphaAng * i), 0, -Math.sin(alphaAng * i),
+                    0, 0, 0,
+                    0, 0, 0,
                 );
             }
         }
