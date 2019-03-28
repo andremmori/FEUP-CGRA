@@ -23,6 +23,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 2);
         this.cylinder = new MyCylinder(this, 6, 2);
+        this.tree = new MyTree(this, 3, 1, 2, 2, null, null);
 
         //Objects connected to MyInterface
 
@@ -33,9 +34,9 @@ class MyScene extends CGFscene {
         this.displayObj = false;
         this.selectedObject = 0;
 
-        this.objects = [this.prism, this.cylinder];
+        this.objects = [this.prism, this.cylinder, this.tree];
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Prism': 0, 'Cylinder': 1};
+        this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2};
 
     }
     initLights() {
@@ -68,8 +69,9 @@ class MyScene extends CGFscene {
         if (this.displayAxis)
             this.axis.display();
 
-        if(this.displayObj)
+        if(this.displayObj){
             this.objects[this.selectedObject].display();
+        }
 
         if (this.displayNormals)
             this.objects[this.selectedObject].enableNormalViz();
