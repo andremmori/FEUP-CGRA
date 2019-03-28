@@ -35,5 +35,14 @@ class MyTree extends CGFobject {
         this.cone.display();
         this.scene.popMatrix();
     }
+
+    enableNormalViz() {
+        this.cone.enableNormalViz();
+        this.cylinder.enableNormalViz();
+    }
+    disableNormalViz() {
+        this.cone.disableNormalViz();
+        this.cylinder.disableNormalViz();
+    }
 }
 
