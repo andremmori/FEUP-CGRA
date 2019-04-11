@@ -4,20 +4,20 @@
  * @param scene - Reference to MyScene object
  */
 class MyUnitCubeQuad extends CGFobject {
-    constructor(scene) {
+    constructor(scene, topTexture, bottomTexture, sideTexture) {
         super(scene);
         this.quad = new MyQuad(this.scene);
 
         this.quadTop = new CGFappearance(this.scene);
-        this.quadTop.loadTexture('images/mineTop.png');
+        this.quadTop.loadTexture(topTexture);
         this.quadTop.setTextureWrap('REPEAT', 'REPEAT');
 
         this.quadBottom = new CGFappearance(this.scene);
-        this.quadBottom.loadTexture('images/mineBottom.png');
+        this.quadBottom.loadTexture(bottomTexture);
         this.quadBottom.setTextureWrap('REPEAT', 'REPEAT');
 
         this.quadSide = new CGFappearance(this.scene);
-        this.quadSide.loadTexture('images/mineSide.png');
+        this.quadSide.loadTexture(sideTexture);
         this.quadSide.setTextureWrap('REPEAT', 'REPEAT');
 
     }
