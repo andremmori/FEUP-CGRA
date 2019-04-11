@@ -27,6 +27,7 @@ class MyScene extends CGFscene {
         this.treeGroup = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
+        this.hill = new MyVoxelHill(this, 4);
 
         //Objects connected to MyInterface
 
@@ -37,9 +38,9 @@ class MyScene extends CGFscene {
         this.displayObj = false;
         this.selectedObject = 0;
 
-        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house];
+        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill];
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2, 'TreeGroup':3, 'TreeRow':4, 'House':5};
+        this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2, 'TreeGroup':3, 'TreeRow':4, 'House':5, 'Hill': 6};
 
     }
     initLights() {
