@@ -77,7 +77,7 @@ class MyScene extends CGFscene {
             this.axis.display();
 
         if(this.displayObj){
-            //this.scale(100, 1, 10);
+            //this.scale(100, 2, 10);
             this.objects[this.selectedObject].display();
         }
 
