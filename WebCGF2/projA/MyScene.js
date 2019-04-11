@@ -69,6 +69,8 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
 
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
