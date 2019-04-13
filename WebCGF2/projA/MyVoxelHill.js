@@ -12,7 +12,6 @@ class MyVoxelHill extends CGFobject {
 
     }
 
-
     display() {
         
         for(var i = 0; i <= this.level; i++)

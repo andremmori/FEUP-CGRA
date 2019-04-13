@@ -13,6 +13,7 @@ class MyCylinder extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
         
         var alphaAng = 2 * Math.PI / this.slices;
         var step = 1 / this.stacks;
@@ -25,9 +26,9 @@ class MyCylinder extends CGFobject {
                     Math.cos(alphaAng * i), j * step, -Math.sin(alphaAng * i)
                 );
 
-             /*   this.texCoords.push(
+               this.texCoords.push(
                     i * 1 / this.slices, j * 1 / this.stacks
-                ); */
+                ); 
 
                 this.normals.push(
                     Math.cos(alphaAng * i), 0, -Math.sin(alphaAng * i)

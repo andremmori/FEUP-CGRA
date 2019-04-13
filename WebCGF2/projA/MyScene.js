@@ -18,18 +18,21 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 2);
         this.cylinder = new MyCylinder(this, 6, 2);
-        this.tree = new MyTree(this, 6, 1, 2, 1, null, null);
+        this.tree = new MyTree(this, 2, 1, 2, 2, null, null);
         this.treeGroup = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         this.hill = new MyVoxelHill(this, 4);
-        this.cube = new MyUnitCube(this);
 
+        //Textures
+
+        
         //Objects connected to MyInterface
 
 
@@ -37,11 +40,12 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
         this.displayObj = false;
+        this.displayTeste = false;
         this.selectedObject = 0;
 
-        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill, this.cube];
+        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill, this.cube, this.teste];
         // Labels and ID's for object selection on MyInterface
-        this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2, 'TreeGroup':3, 'TreeRow':4, 'House':5, 'Hill': 6, 'Cube': 7};
+        this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2, 'TreeGroup':3, 'TreeRow':4, 'House':5, 'Hill': 6};
 
     }
     initLights() {
@@ -59,6 +63,10 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    updateTexCoords() {
+        this.cube.updateTexCoords(this.texCoords);
+    }
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene

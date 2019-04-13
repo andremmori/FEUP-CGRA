@@ -13,6 +13,7 @@ class MyCone extends CGFobject {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = [];
 
         var ang = 0;
         var alphaAng = 2*Math.PI/this.slices;
@@ -27,6 +28,15 @@ class MyCone extends CGFobject {
         this.vertices.push(0,1,0);
         this.normals.push(0,1,0);
 
+        for(var i = 0; i <= this.stacks; i++){
+
+            var v = i / this.stacks;
+            for(var j = 0; j <= this.slices; j++){
+                var u = j / this.slices;
+                this.texCoords.push(u, 1 - v);
+            }
+        }
+
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
@@ -40,5 +50,3 @@ class MyCone extends CGFobject {
         this.initNormalVizBuffers();
     }
 }
-
-

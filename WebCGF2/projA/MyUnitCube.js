@@ -4,9 +4,12 @@
  * @param scene - Reference to MyScene object
  */
 class MyUnitCube extends CGFobject {
-    constructor(scene) {
+    constructor(scene, coords) {
         super(scene);
         this.initBuffers();
+        if (coords != undefined)
+            this.updateTexCoords(coords);
+
     }
     initBuffers() {
         this.vertices = [
@@ -102,9 +105,47 @@ class MyUnitCube extends CGFobject {
             0, 1, 0,
 
         ]
-
+/*
+        this.textCoords = [
+            // Front
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+            // Back
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+            // Top
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+            // Bottom
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+            // Right
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+            // Left
+            0.0, 0.0,
+            1.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0,
+        ]
+*/
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
+    updateTexCoords(coords) {
+        this.texCoords = [...coords];
+        this.updateTexCoordsGLBuffers();
+    }
+
 }
 
