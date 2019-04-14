@@ -18,7 +18,6 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
-        this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -29,10 +28,28 @@ class MyScene extends CGFscene {
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         this.hill = new MyVoxelHill(this, 4);
-
-        //Textures
-
+        this.cubeDay = new MyUnitCube(this, 'images/lake1_up.jpg', 'images/lake1_dn.jpg', 'images/lake1_rt.jpg', 'images/lake1_lf.jpg', 'images/lake1_ft.jpg', 'images/lake1_bk.jpg');
+        this.cubeNight = new MyUnitCube(this, 'images/grave_up.png', 'images/grave_dn.png', 'images/grave_rt.png', 'images/grave_lf.png', 'images/grave_ft.png', 'images/grave_bk.png');
         
+        //Materials
+        this.madeira = new CGFappearance(this);
+        this.madeira.setAmbient(0.5, 0.3, 0, 1.0);
+        this.madeira.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
+        this.madeira.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
+        this.madeira.setShininess(38.4);
+
+        this.stone = new CGFappearance(this);
+        this.stone.setAmbient(0.05375, 0.05, 0.06625, 0.82);
+        this.stone.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
+        this.stone.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
+        this.stone.setShininess(38.4);
+
+        this.gold = new CGFappearance(this);
+        this.gold.setAmbient(0.24725, 0.1995, 0.0745);
+        this.gold.setDiffuse(0.75164, 0.60648, 0.22648);
+        this.gold.setSpecular(0.628281, 0.555802, 0.366065);
+        this.gold.setShininess(0.4);
+
         //Objects connected to MyInterface
 
 
@@ -40,28 +57,55 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayNormals = false;
         this.displayObj = false;
-        this.displayTeste = false;
+        this.displayTextures = true;
+        this.displayDay = false;
+        this.displayNight = false;
+        this.displayNightS = false;
         this.selectedObject = 0;
+        this.ambientLight = 0.5;
 
-        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill, this.cube, this.teste];
+
+        this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill];
         // Labels and ID's for object selection on MyInterface
         this.objectIDs = { 'Prism': 0, 'Cylinder': 1, 'Tree':2, 'TreeGroup':3, 'TreeRow':4, 'House':5, 'Hill': 6};
 
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+
+        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].enable();
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].disable();
+        this.lights[0].setVisible(true);
         this.lights[0].update();
+
+        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[1].disable();
+        this.lights[1].setVisible(true);
+        this.lights[1].update();
+    
+        this.lights[2].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[2].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[2].disable();
+        this.lights[2].setVisible(true);
+        this.lights[2].update();
+
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+    }
+    updateAmbientLight() {
+        this.setGlobalAmbientLight(this.ambientLight, this.ambientLight, this.ambientLight, 1);
     }
     updateTexCoords() {
         this.cube.updateTexCoords(this.texCoords);
@@ -78,14 +122,58 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
 
+        this.lights[0].update();
+        this.lights[1].update();
+        this.lights[2].update();
+
+
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         // Draw axis
-        if (this.displayAxis)
+        if (this.displayAxis){
             this.axis.display();
+        }
+
+        if (this.displayDay){
+            this.displayNight = false;
+            this.lights[0].enable();
+            this.lights[1].disable();
+            this.pushMatrix();
+            this.scale(100, 100, 100);
+            this.cubeDay.display();
+            this.popMatrix();
+        }
+        else if (this.displayNight){
+            this.displayDay = false;
+            this.lights[1].enable();
+            this.lights[0].disable();
+            this.pushMatrix();
+            this.scale(100, 100, 100);
+            this.cubeNight.display();
+            this.popMatrix();
+        }
+        else{
+            this.lights[0].disable();
+            this.lights[1].disable();
+            this.lights[2].disable();
+        }
+
+        if(this.displayNightS){
+            this.lights[2].enable();
+            this.pushMatrix();
+            this.gold.apply();
+            this.cylinder.display();
+            this.popMatrix();
+        }
+        else
+            this.lights[2].disable();
+
+        if(this.displayTextures)
+            this.enableTextures(true);
+        else
+            this.enableTextures(false);
 
         if(this.displayObj){
-            //this.scale(100, 2, 10);
             this.objects[this.selectedObject].display();
         }
 

@@ -77,7 +77,6 @@ class MyUnitCubeQuad extends CGFobject {
     }
     disableNormalViz() {
         this.quad.disableNormalViz();
-
     }
 }
 

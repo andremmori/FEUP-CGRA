@@ -18,7 +18,7 @@ class MyTree extends CGFobject {
         this.trunkTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         this.topTexture = new CGFappearance(this.scene);
-        this.topTexture.loadTexture('images/mineTop.png');
+        this.topTexture.loadTexture('images/treeTop.jpg');
         this.topTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         this.cylinder = new MyCylinder(this.scene, 8, 2);
