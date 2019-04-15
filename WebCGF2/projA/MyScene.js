@@ -63,12 +63,12 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.displayObj = false;
         this.displayTextures = true;
-        this.displayDay = false;
+        this.displayDay = true;
         this.displayNight = false;
         this.displayNightS = false;
         this.selectedObject = 0;
         this.ambientLight = 0.5;
-        this.displayScenario = false;
+        this.displayScenario = true;
 
 
         this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill, this.fire];
@@ -83,7 +83,7 @@ class MyScene extends CGFscene {
         this.lights[0].setAmbient(1.0, 1.0, 0.0, 1.0);       
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].setLinearAttenuation(0.00);
+        this.lights[0].setLinearAttenuation(0.001);
         this.lights[0].disable();
         this.lights[0].setVisible(true);
         this.lights[0].update();
@@ -92,7 +92,7 @@ class MyScene extends CGFscene {
         this.lights[1].setAmbient(0.0, 0.5, 0.75, 1.0);
         this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
-        this.lights[1].setLinearAttenuation(0.30);
+        this.lights[1].setLinearAttenuation(0.35);
         this.lights[1].disable();
         this.lights[1].setVisible(true);
         this.lights[1].update();
@@ -108,7 +108,7 @@ class MyScene extends CGFscene {
 
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
