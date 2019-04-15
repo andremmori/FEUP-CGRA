@@ -22,6 +22,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'selectedObject', this.scene.objectIDs).name('Selected Object');
         this.gui.add(this.scene, 'displayNormals').name("Display normals");
         this.gui.add(this.scene, 'displayTextures').name("Display Textures");
+        this.gui.add(this.scene, 'displayScenario').name("Display Scenario");
         var f = this.gui.addFolder('Day/Night Mode ');
         f.add(this.scene, 'displayDay').name("Display Day");
         f.add(this.scene, 'displayNight').name("Display Night");

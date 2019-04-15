@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.treeRow = new MyTreeRowPatch(this);
         this.house = new MyHouse(this);
         this.hill = new MyVoxelHill(this, 4);
+        this.myQuad = new MyQuad(this);
         this.cubeDay = new MyUnitCube(this, 'images/lake1_up.jpg', 'images/lake1_dn.jpg', 'images/lake1_rt.jpg', 'images/lake1_lf.jpg', 'images/lake1_ft.jpg', 'images/lake1_bk.jpg');
         this.cubeNight = new MyUnitCube(this, 'images/grave_up.png', 'images/grave_dn.png', 'images/grave_rt.png', 'images/grave_lf.png', 'images/grave_ft.png', 'images/grave_bk.png');
         
@@ -51,6 +52,11 @@ class MyScene extends CGFscene {
         this.gold.setShininess(0.4);
 
         //Objects connected to MyInterface
+        // Textura myquad
+        this.quadTop = new CGFappearance(this);
+        this.quadTop.loadTexture('images/mineTop.png');
+        this.quadTop.setTextureWrap('REPEAT', 'REPEAT');
+
 
 
         //Other variables connected to MyInterface
@@ -63,6 +69,7 @@ class MyScene extends CGFscene {
         this.displayNightS = false;
         this.selectedObject = 0;
         this.ambientLight = 0.5;
+        this.displayScenario = false;
 
 
         this.objects = [this.prism, this.cylinder, this.tree , this.treeGroup, this.treeRow, this.house, this.hill];
@@ -96,7 +103,7 @@ class MyScene extends CGFscene {
 
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -109,7 +116,9 @@ class MyScene extends CGFscene {
     }
     updateTexCoords() {
         this.cube.updateTexCoords(this.texCoords);
+        this.myQuad.updateTexCoords(this.texCoords);
     }
+
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -181,6 +190,58 @@ class MyScene extends CGFscene {
             this.objects[this.selectedObject].enableNormalViz();
         else this.objects[this.selectedObject].disableNormalViz();
 
+
+        if(this.displayScenario){
+            this.house.display();
+
+            // MyQuad
+            this.pushMatrix();
+            this.rotate(Math.PI/2, -1, 0, 0);
+            this.scale(40,40,1);
+            this.quadTop.apply();
+            this.myQuad.display();
+            this.popMatrix();
+
+            // TreeGroup I
+            this.pushMatrix();
+            this.translate(-10,0,-10);
+            this.treeGroup.display();
+            this.popMatrix();
+
+            // TreeGroup II
+            this.pushMatrix();
+            this.translate(7, 0, -10);
+            this.treeGroup.display();
+            this.popMatrix();
+
+            // TreeRow I
+            this.pushMatrix();
+            this.translate(-1, 0, 15);
+            this.treeRow.display();
+            this.popMatrix();
+
+            // TreeRow II
+            this.pushMatrix();
+            this.translate(-10, 0, 10);
+            this.treeRow.display();
+            this.popMatrix();
+
+            // Hill I
+            this.pushMatrix();
+            this.translate(-10, 0, 3);
+            this.hill.display();
+            this.popMatrix();
+
+            // Hill II
+            this.pushMatrix();
+            this.translate(10, 0, 3);
+            this.hill.display();
+            this.popMatrix();
+
+            this.pushMatrix();
+            this.popMatrix();
+
+        }
 
 
         //Apply default appearance
