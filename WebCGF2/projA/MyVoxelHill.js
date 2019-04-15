@@ -7,7 +7,7 @@ class MyVoxelHill extends CGFobject {
     constructor(scene, height) {
         super(scene);
 
-        this.quad = new MyUnitCubeQuad(this.scene, 'images/mineTop.png', 'images/mineBottom.png', 'images/mineSide.png');
+        this.quad = new MyUnitCubeQuad(this.scene, 'images/mineTop.png', 'images/mineBottom.png', 'images/mineSide.png', 'images/mineSide.png');
         this.level = height;
 
     }

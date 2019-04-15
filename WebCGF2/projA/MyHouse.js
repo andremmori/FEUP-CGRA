@@ -4,10 +4,10 @@
  * @param scene - Reference to MyScene object
  */
 class MyHouse extends CGFobject {
-    constructor(scene, texCube, texPyr, texPrism) {
+    constructor(scene, texCube1, texCube2, texPyr, texPrism) {
         super(scene);
 
-        this.cube = new MyUnitCubeQuad(this.scene, texCube, texCube, texCube);
+        this.cube = new MyUnitCubeQuad(this.scene, texCube1, texCube1, texCube1, texCube2);
         this.pyramid= new MyPyramid(this.scene, 4, 2);
         this.prism = new MyPrism(this.scene, 7, 2);
 

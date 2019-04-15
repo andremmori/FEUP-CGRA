@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 class MyUnitCubeQuad extends CGFobject {
-    constructor(scene, topTexture, bottomTexture, sideTexture) {
+    constructor(scene, topTexture, bottomTexture, sideTexture1, sideTexture2) {
         super(scene);
         this.quad = new MyQuad(this.scene);
 
@@ -16,9 +16,13 @@ class MyUnitCubeQuad extends CGFobject {
         this.quadBottom.loadTexture(bottomTexture);
         this.quadBottom.setTextureWrap('REPEAT', 'REPEAT');
 
-        this.quadSide = new CGFappearance(this.scene);
-        this.quadSide.loadTexture(sideTexture);
-        this.quadSide.setTextureWrap('REPEAT', 'REPEAT');
+        this.quadSide1 = new CGFappearance(this.scene);
+        this.quadSide1.loadTexture(sideTexture1);
+        this.quadSide1.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.quadSide2 = new CGFappearance(this.scene);
+        this.quadSide2.loadTexture(sideTexture2);
+        this.quadSide2.setTextureWrap('REPEAT', 'REPEAT');
 
     }
 
@@ -45,27 +49,27 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(this.convertAng(-90), 0, -1, 0);
-        this.quadSide.apply();
+        this.quadSide1.apply();
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(this.convertAng(90), 0, -1, 0);
-        this.quadSide.apply();
+        this.quadSide1.apply();
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
-        this.quadSide.apply();
+        this.quadSide2.apply();
         this.quad.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(this.convertAng(-180), 0, -1, 0);
-        this.quadSide.apply();
+        this.quadSide1.apply();
         this.quad.display();
         this.scene.popMatrix();
 
