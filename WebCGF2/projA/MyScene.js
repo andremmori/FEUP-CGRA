@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
         this.tree = new MyTree(this, 2, 1, 2, 2, null, null);
         this.treeGroup = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
-        this.house = new MyHouse(this, this.madeira, this.stone, this.gold);
+        this.house = new MyHouse(this, 'images/mineStone.png', this.stone, this.gold);
         this.hill = new MyVoxelHill(this, 4);
         this.myQuad = new MyQuad(this);
         this.cubeDay = new MyUnitCube(this, 'images/lake1_up.jpg', 'images/lake1_dn.jpg', 'images/lake1_rt.jpg', 'images/lake1_lf.jpg', 'images/lake1_ft.jpg', 'images/lake1_bk.jpg');
