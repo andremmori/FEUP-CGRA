@@ -19,6 +19,25 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
+        //Materials
+        this.madeira = new CGFappearance(this);
+        this.madeira.setAmbient(0.5, 0.3, 0, 1.0);
+        this.madeira.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
+        this.madeira.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
+        this.madeira.setShininess(38.4);
+        
+        this.stone = new CGFappearance(this);
+        this.stone.setAmbient(0.05375, 0.05, 0.06625, 0.82);
+        this.stone.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
+        this.stone.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
+        this.stone.setShininess(38.4);
+        
+        this.gold = new CGFappearance(this);
+        this.gold.setAmbient(0.24725, 0.1995, 0.0745);
+        this.gold.setDiffuse(0.75164, 0.60648, 0.22648);
+        this.gold.setSpecular(0.628281, 0.555802, 0.366065);
+        this.gold.setShininess(0.4);
+        
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.prism = new MyPrism(this, 3, 2);
@@ -26,31 +45,12 @@ class MyScene extends CGFscene {
         this.tree = new MyTree(this, 2, 1, 2, 2, null, null);
         this.treeGroup = new MyTreeGroupPatch(this);
         this.treeRow = new MyTreeRowPatch(this);
-        this.house = new MyHouse(this);
+        this.house = new MyHouse(this, this.madeira, this.stone, this.gold);
         this.hill = new MyVoxelHill(this, 4);
         this.myQuad = new MyQuad(this);
         this.cubeDay = new MyUnitCube(this, 'images/lake1_up.jpg', 'images/lake1_dn.jpg', 'images/lake1_rt.jpg', 'images/lake1_lf.jpg', 'images/lake1_ft.jpg', 'images/lake1_bk.jpg');
         this.cubeNight = new MyUnitCube(this, 'images/grave_up.png', 'images/grave_dn.png', 'images/grave_rt.png', 'images/grave_lf.png', 'images/grave_ft.png', 'images/grave_bk.png');
-        
-        //Materials
-        this.madeira = new CGFappearance(this);
-        this.madeira.setAmbient(0.5, 0.3, 0, 1.0);
-        this.madeira.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
-        this.madeira.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
-        this.madeira.setShininess(38.4);
-
-        this.stone = new CGFappearance(this);
-        this.stone.setAmbient(0.05375, 0.05, 0.06625, 0.82);
-        this.stone.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
-        this.stone.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
-        this.stone.setShininess(38.4);
-
-        this.gold = new CGFappearance(this);
-        this.gold.setAmbient(0.24725, 0.1995, 0.0745);
-        this.gold.setDiffuse(0.75164, 0.60648, 0.22648);
-        this.gold.setSpecular(0.628281, 0.555802, 0.366065);
-        this.gold.setShininess(0.4);
-
+       
         //Objects connected to MyInterface
         // Textura myquad
         this.quadTop = new CGFappearance(this);

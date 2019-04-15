@@ -4,12 +4,15 @@
  * @param scene - Reference to MyScene object
  */
 class MyHouse extends CGFobject {
-    constructor(scene) {
+    constructor(scene, texCube, texPyr, texPrism) {
         super(scene);
 
-        this.cube = new MyUnitCubeQuad(this.scene, null, null, null);
+        this.cube = new MyUnitCubeQuad(this.scene, texCube, texCube, texCube);
         this.pyramid= new MyPyramid(this.scene, 4, 2);
         this.prism = new MyPrism(this.scene, 7, 2);
+
+        this.texPyr = texPyr;
+        this.texPrism = texPrism;
 
     }
     convertAng(ang) {
@@ -29,6 +32,7 @@ class MyHouse extends CGFobject {
         this.scene.rotate(this.convertAng(45),0, 1, 0);
         this.scene.scale(2.5, 2, 2.5);
         this.scene.translate(0, 1, 0);
+        this.texPyr.apply();
         this.pyramid.display();
         this.scene.popMatrix();
 
@@ -44,6 +48,7 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(3, 0, -0.75);
         this.scene.scale(0.15, 2, 0.15);
+        this.texPrism.apply();
         this.prism.display();
         this.scene.popMatrix();
 
@@ -51,6 +56,7 @@ class MyHouse extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(3, 0, 0.75);
         this.scene.scale(0.15, 2, 0.15);
+        this.texPrism.apply();
         this.prism.display();
         this.scene.popMatrix();
 
