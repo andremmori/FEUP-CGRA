@@ -12,7 +12,7 @@ void main(){
     vec4 color=texture2D(uSampler,vTextureCoord+vec2(timeFactor*.01,0.));
     vec4 filter=texture2D(uSampler2,vec2(0.,.1)+vTextureCoord);
     
-    color=vec4(0,color.g-0.2*(1.-filter.g),color.b-0.2*(1.-filter.b),1.);
+    color=vec4(0,color.g-0.2*filter.g,color.b-0.2*filter.b,1.);
     
     gl_FragColor=color;
 }
