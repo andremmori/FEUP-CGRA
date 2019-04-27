@@ -81,6 +81,7 @@ class ShaderScene extends CGFscene {
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[9].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[11].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0 });
 
 
 
@@ -184,6 +185,9 @@ class ShaderScene extends CGFscene {
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
 		else if (this.selectedExampleShader == 9)
 			this.testShaders[9].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		else if (this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 100 % 1000 });
+
 	}
 
 	// main display function
