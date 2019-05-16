@@ -9,8 +9,9 @@ class MyBird extends CGFobject {
 
         this.cubo = new MyUnitCube(this.scene);
         this.bico = new MyPyramid(this.scene, 4, 2);
-        this.prism = new MyPrism(this.scene, 7, 2);
+        this.tail = new MyCylinder(this.scene, 7, 2);
         this.sobs = new MyQuad(this.scene);
+        this.triangle = new MyTriangleSmall(this.scene);
 
         this.olhoColor = new CGFappearance(this.scene);
         this.olhoColor.setAmbient(0, 0, 0, 1);
@@ -93,6 +94,55 @@ class MyBird extends CGFobject {
         this.bicoColor.apply();
         this.bico.display();
         this.scene.popMatrix();
+
+        // Calda
+        this.scene.pushMatrix();
+        this.scene.translate(-1, 6.5, 0);
+        this.scene.rotate(this.convertAng(60), 0, 0, 1);
+        this.scene.scale(0.25, 1, 0.25);
+        this.birdColor.apply();
+        this.tail.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-1, 6.5, 0);
+        this.scene.rotate(this.convertAng(115), 0, 0, 1);
+        this.scene.scale(0.25, 1, 0.25);
+        this.birdColor.apply();
+        this.tail.display();
+        this.scene.popMatrix();
+
+        // Asa
+        this.scene.pushMatrix();
+        this.scene.translate(0, 6, -2);
+        this.scene.rotate(this.convertAng(15), 1, 0, 0);
+        this.scene.scale(2, 0, 2);
+        this.birdColor.apply();
+        this.cubo.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 6, 2);
+        this.scene.rotate(this.convertAng(-15), 1, 0, 0);
+        this.scene.scale(2, 0, 2);
+        this.birdColor.apply();
+        this.cubo.display();
+        this.scene.popMatrix();
+        //tri
+        this.scene.pushMatrix();
+        this.scene.translate(0, 6.25, -3);
+        this.scene.rotate(this.convertAng(-60), 1, 0, 0);
+        this.scene.scale(1, 1, 1);
+        this.birdColor.apply();
+        this.triangle.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(0, 6.25, 3);
+        this.scene.rotate(this.convertAng(60), 1, 0, 0);
+        this.scene.scale(1, 1, 1);
+        this.birdColor.apply();
+        this.triangle.display();
+        this.scene.popMatrix();
+
     }
         
 

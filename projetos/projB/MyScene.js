@@ -27,6 +27,9 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        this.displayAxis = true;
+        this.displayBird = true;
+        this.displayPlane = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -59,19 +62,22 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        if(this.displayAxis)
+            this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // Display objs
-        this.bird.display();
+        if(this.displayBird)
+            this.bird.display();
 
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        this.plane.display();
+        if(this.displayPlane)
+            this.plane.display();
         this.popMatrix();
         // ---- END Primitive drawing section
     }
