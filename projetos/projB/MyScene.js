@@ -24,7 +24,12 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
-        this.bird = new MyBird(this);
+
+        //Bird
+        this.orientacao = 0;
+        this.velocidade = 0;
+        this.posicao = [0, 0, 0];
+        this.bird = new MyBird(this, this.orientacao, this.velocidade, [0,3,0]);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -46,8 +51,39 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
+    update(t) {
+        this.checkKeys();
+        if (this.gui.isKeyPressed("KeyW")) {
+            this.bird.update(t, "W");
+        }
+        else if (this.gui.isKeyPressed("KeyS")) {
+            this.bird.update(t, "S");
+        }
+        else if (this.gui.isKeyPressed("KeyD")) {
+            this.bird.update(t, "D");
+        }
+        else if (this.gui.isKeyPressed("KeyA")) {
+            this.bird.update(t, "A");            
+        }
+    }
+    convertAng(ang) {
+        return (Math.PI * ang / 180);
+    }
 
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+        // Check for key codes e.g. in ​https://keycode.info/ 
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            keysPressed = true;
+        }
+        if (keysPressed)
+            console.log(text);
     }
 
     display() {
@@ -62,21 +98,23 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        if(this.displayAxis)
+        if (this.displayAxis)
             this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // Display objs
-        if(this.displayBird)
+        if (this.displayBird) {
+            this.pushMatrix();
             this.bird.display();
-
+            this.popMatrix();
+        }
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
-        this.rotate(-0.5*Math.PI, 1, 0, 0);
+        this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        if(this.displayPlane)
+        if (this.displayPlane)
             this.plane.display();
         this.popMatrix();
         // ---- END Primitive drawing section
