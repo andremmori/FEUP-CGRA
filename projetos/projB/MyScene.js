@@ -26,10 +26,7 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
 
         //Bird
-        this.orientacao = 0;
-        this.velocidade = 0;
-        this.posicao = [0, 0, 0];
-        this.bird = new MyBird(this, this.orientacao, this.velocidade, [0,3,0]);
+        this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
@@ -80,6 +77,14 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text += " S ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " A ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " D ";
             keysPressed = true;
         }
         if (keysPressed)

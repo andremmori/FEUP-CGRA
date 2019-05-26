@@ -4,11 +4,13 @@
  * @param scene - Reference to MyScene object
  */
 class MyBird extends CGFobject {
-    constructor(scene, orientacao, velocidade, posicao) {
+    constructor(scene) {
         super(scene);
-        this.orientacao = orientacao;
-        this.velocidade = velocidade;
-        this.posicao = posicao;
+        this.orientacao = 0;
+        this.velocidade = 0;
+        this.x = 0;
+        this.y = 3;
+        this.z = 0;
 
         this.cubo = new MyUnitCube(this.scene);
         this.bico = new MyPyramid(this.scene, 4, 2);
@@ -41,9 +43,11 @@ class MyBird extends CGFobject {
 
     display() {
        
+        this.movement();
         // Corpo
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0], this.posicao[1]+3, this.posicao[2]);
+        
+        this.scene.translate(0, this.y+3, 0);
         this.scene.scale(2, 2, 2);
         this.birdColor.apply();
         this.cubo.display();
@@ -51,7 +55,8 @@ class MyBird extends CGFobject {
 
         // Cabeca
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 1.5, this.posicao[1]+ 4.25, this.posicao[2]);
+        
+        this.scene.translate(0 + 1.5, this.y+ 4.25, 0);
         this.scene.scale(2, 2, 2);
         this.birdColor.apply();
         this.cubo.display();
@@ -59,14 +64,17 @@ class MyBird extends CGFobject {
 
         // 
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 2.5, this.posicao[1] + 5, this.posicao[2]+0.25);
+        
+        this.scene.translate(0 + 2.5, this.y + 5, 0+0.25);
         this.scene.rotate(this.convertAng(-30), 1, 0, 0);
         this.scene.scale(0.6, 0.1, 0.6);
         this.olhoColor.apply();
         this.cubo.display();
         this.scene.popMatrix();
+
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 2.5, this.posicao[1] + 5, this.posicao[2] - 0.25);
+        
+        this.scene.translate(0 + 2.5, this.y + 5, 0 - 0.25);
         this.scene.rotate(this.convertAng(30), 1, 0, 0);
         this.scene.scale(0.6, 0.1, 0.6);
         this.olhoColor.apply();
@@ -77,14 +85,16 @@ class MyBird extends CGFobject {
         // Olhos
         // Dir
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 2.5, this.posicao[1]+4.5, this.posicao[2]+0.5);
+        
+        this.scene.translate(0 + 2.5, this.y+4.5, 0+0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.olhoColor.apply();
         this.cubo.display();
         this.scene.popMatrix();
         // Esq
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 2.5, this.posicao[1] + 4.5, this.posicao[2] - 0.5);
+        
+        this.scene.translate(0 + 2.5, this.y + 4.5, 0 - 0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.olhoColor.apply();
         this.cubo.display();
@@ -92,7 +102,8 @@ class MyBird extends CGFobject {
 
         // Bico
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] + 2.5, this.posicao[1]+4, this.posicao[2]);
+        
+        this.scene.translate(0 + 2.5, this.y+4, 0);
         this.scene.rotate(this.convertAng(-90), 0, 0, 1);
         this.scene.scale(0.3, 0.3, 0.3);
         this.bicoColor.apply();
@@ -101,14 +112,17 @@ class MyBird extends CGFobject {
 
         // Calda
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] - 1, this.posicao[1] + 3.5, this.posicao[2]);
+        
+        this.scene.translate(0 - 1, this.y + 3.5, 0);
         this.scene.rotate(this.convertAng(60), 0, 0, 1);
         this.scene.scale(0.25, 1, 0.25);
         this.birdColor.apply();
         this.tail.display();
         this.scene.popMatrix();
+
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0] - 1, this.posicao[1] + 3.5, this.posicao[2]);
+        
+        this.scene.translate(0 - 1, this.y + 3.5, 0);
         this.scene.rotate(this.convertAng(115), 0, 0, 1);
         this.scene.scale(0.25, 1, 0.25);
         this.birdColor.apply();
@@ -117,7 +131,8 @@ class MyBird extends CGFobject {
 
         // Asa
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0], this.posicao[1]+3, this.posicao[2]-2);
+        
+        this.scene.translate(0, this.y+3, 0-2);
         this.scene.rotate(this.convertAng(15), 1, 0, 0);
         this.scene.scale(2, 0, 2);
         this.birdColor.apply();
@@ -125,7 +140,8 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0], this.posicao[1] + 3, this.posicao[2]+2);
+        
+        this.scene.translate(0, this.y + 3, 0+2);
         this.scene.rotate(this.convertAng(-15), 1, 0, 0);
         this.scene.scale(2, 0, 2);
         this.birdColor.apply();
@@ -133,14 +149,17 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
         //triangulos
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0], this.posicao[1] + 3.25, this.posicao[2]-3);
+        
+        this.scene.translate(0, this.y + 3.25, 0-3);
         this.scene.rotate(this.convertAng(-60), 1, 0, 0);
         this.scene.scale(1, 1, 1);
         this.birdColor.apply();
         this.triangle.display();
         this.scene.popMatrix();
+
         this.scene.pushMatrix();
-        this.scene.translate(this.posicao[0], this.posicao[1] + 3.25, this.posicao[2] + 3);
+        
+        this.scene.translate(0, this.y + 3.25, 0 + 3);
         this.scene.rotate(this.convertAng(60), 1, 0, 0);
         this.scene.scale(1, 1, 1);
         this.birdColor.apply();
@@ -162,18 +181,36 @@ class MyBird extends CGFobject {
 
     update(timeFactor, direction){
         if(direction == "W"){
-            this.posicao[0]++;
-        }
-        else if (direction == "S") {
-            this.posicao[0]--;
-        }
-        else if (direction == "A") {
-            this.posicao[0]++;
-        }
-        else if (direction == "D") {
-            this.posicao[0]++;
+            this.x += Math.cos(-this.orientacao);
+            this.z += Math.sin(-this.orientacao);
         }
 
+        else if (direction == "S") {
+            this.x -= Math.cos(-this.orientacao);
+            this.z -= Math.sin(-this.orientacao);
+        }
+
+        else if (direction == "A") {
+            this.turn(-1 * timeFactor / 100 % 1000);    
+        }
+
+        else if (direction == "D") {
+            this.turn(timeFactor / 100 % 1000);                
+        }
+
+    }
+
+    turn(v){
+        this.orientacao += this.convertAng(v);
+    }
+
+    accelerate(v){
+
+    }
+
+    movement(){
+        this.scene.translate(this.x, 0, this.z);
+        this.scene.rotate(this.orientacao, 0, 1, 0);
     }
 }
 
