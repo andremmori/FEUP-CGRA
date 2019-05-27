@@ -191,17 +191,17 @@ class MyBird extends CGFobject {
         }
 
         else if (direction == "A") {
-            this.turn(-1 * timeFactor / 100 % 1000);    
+            this.turn((timeFactor / 100 % 1000));    
         }
 
         else if (direction == "D") {
-            this.turn(timeFactor / 100 % 1000);                
+            this.turn(-1*(timeFactor / 100 % 1000));                
         }
 
     }
 
     turn(v){
-        this.orientacao += this.convertAng(v);
+        this.orientacao += this.convertAng(0.5)*v/3.5;
     }
 
     accelerate(v){

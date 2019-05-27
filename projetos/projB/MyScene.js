@@ -32,6 +32,11 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayBird = true;
         this.displayPlane = true;
+
+        // set the scene update period 
+        // (to invoke the update() method every 50ms or as close as possible to that )
+        this.setUpdatePeriod(50);
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
