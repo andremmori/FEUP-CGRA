@@ -185,16 +185,16 @@ class MyBird extends CGFobject {
             this.z += Math.sin(-this.orientacao);
         }
 
-        else if (direction == "S") {
+        if (direction == "S") {
             this.x -= Math.cos(-this.orientacao);
             this.z -= Math.sin(-this.orientacao);
         }
 
-        else if (direction == "A") {
+        if (direction == "A") {
             this.turn((timeFactor / 100 % 1000));    
         }
 
-        else if (direction == "D") {
+        if (direction == "D") {
             this.turn(-1*(timeFactor / 100 % 1000));                
         }
 
