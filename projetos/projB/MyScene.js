@@ -32,6 +32,9 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayBird = true;
         this.displayPlane = true;
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
+
 
         // set the scene update period 
         // (to invoke the update() method every 50ms or as close as possible to that )
@@ -106,6 +109,13 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
+
+        // Scale
+        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
+            0.0, this.scaleFactor, 0.0, 0.0,
+            0.0, 0.0, this.scaleFactor, 0.0,
+            0.0, 0.0, 0.0, 1.0];
+        this.multMatrix(sca);
 
         // Draw axis
         if (this.displayAxis)
