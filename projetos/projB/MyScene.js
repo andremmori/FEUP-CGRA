@@ -20,10 +20,11 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
         this.setUpdatePeriod(50);
-
+       
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
+        this.terrain = new MyTerrain(this);
 
         //Bird
         this.bird = new MyBird(this);
@@ -68,7 +69,7 @@ class MyScene extends CGFscene {
             this.bird.update(t, "D");
         }
         else if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.update(t, "A");            
+            this.bird.update(t, "A");
         }
     }
     convertAng(ang) {
@@ -134,9 +135,14 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        if (this.displayPlane)
-            this.plane.display();
+        if (this.displayPlane){
+            this.pushMatrix();
+            this.terrain.display();
+            this.popMatrix();
+        }
         this.popMatrix();
         // ---- END Primitive drawing section
+
+        this.setActiveShader(this.defaultShader);
     }
 }
