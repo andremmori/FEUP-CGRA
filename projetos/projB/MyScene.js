@@ -81,16 +81,16 @@ class MyScene extends CGFscene {
     update(t) {
         this.checkKeys();
         if (this.gui.isKeyPressed("KeyW")) {
-            this.bird.update(t, "W");
+            this.bird.update(t, this.speedFactor, "W");
         }
         else if (this.gui.isKeyPressed("KeyS")) {
-            this.bird.update(t, "S");
+            this.bird.update(t, this.speedFactor, "S");
         }
         else if (this.gui.isKeyPressed("KeyD")) {
-            this.bird.update(t, "D");
+            this.bird.update(t, this.speedFactor, "D");
         }
         else if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.update(t, "A");
+            this.bird.update(t, this.speedFactor, "A");
         }
     }
     convertAng(ang) {

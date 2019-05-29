@@ -7,7 +7,7 @@ class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
         this.orientacao = 0;
-        this.velocidade = 0;
+        this.velocidade = 1;
         this.x = 0;
         this.y = 3;
         this.z = 0;
@@ -179,37 +179,38 @@ class MyBird extends CGFobject {
         this.prism.disableNormalViz();
     }
 
-    update(timeFactor, direction){
+    update(timeFactor, speedFactor, direction){
+        this.velocidade = this.scene.speedFactor;
         if(direction == "W"){
-            this.x += Math.cos(-this.orientacao);
-            this.z += Math.sin(-this.orientacao);
+            this.accelerate(0.1);
         }
 
         if (direction == "S") {
-            this.x -= Math.cos(-this.orientacao);
-            this.z -= Math.sin(-this.orientacao);
+            if(this.velocidade > 0.2)
+                this.accelerate(-0.1);            
         }
 
         if (direction == "A") {
-            this.turn((timeFactor / 100 % 1000));    
+            this.turn((speedFactor));    
         }
 
         if (direction == "D") {
-            this.turn(-1*(timeFactor / 100 % 1000));                
+            this.turn(-1 * (speedFactor));                
         }
 
     }
 
     turn(v){
-        this.orientacao += this.convertAng(0.5)*v/3.5;
+        this.orientacao += this.convertAng(10)*v;
     }
 
     accelerate(v){
-
+        this.velocidade += v;
+        this.scene.speedFactor += v; 
     }
 
     movement(){
-        this.scene.translate(this.x, 0, this.z);
+        this.scene.translate((this.x += Math.cos(-this.orientacao) * this.velocidade * 0.1), 0, (this.z += Math.sin(-this.orientacao) * this.velocidade * 0.1));
         this.scene.rotate(this.orientacao, 0, 1, 0);
     }
 }
