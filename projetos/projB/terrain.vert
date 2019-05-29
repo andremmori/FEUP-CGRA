@@ -10,14 +10,13 @@ uniform float timeFactor;
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler2;
 
-
 float normScale=.5;
 
 void main(){
     vec3 offset=vec3(0.,0.,0.);
     
-    vTextureCoord=aTextureCoord+vec2(.5*sin(timeFactor*.04),.5*sin(timeFactor*.04));
+    vTextureCoord=aTextureCoord;
     offset=aVertexNormal*normScale*.1*texture2D(uSampler2,vec2(0.,.1)+vTextureCoord).b;
     
-    gl_Position=uPMatrix*uMVMatrix*vec4(aVertexPosition,1.);
+    gl_Position=uPMatrix*uMVMatrix*vec4(aVertexPosition+offset,1.);
 }

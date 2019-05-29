@@ -19,12 +19,33 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-        this.setUpdatePeriod(50);
        
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
+
+        this.appearance = new CGFappearance(this);
+        this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
+        this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
+        this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
+        this.appearance.setShininess(120);
+
+        this.texture = new CGFtexture(this, "images/terrain.jpg");
+        this.heightmap = new CGFtexture(this, "images/heightmap.jpg");
+        this.altimetry = new CGFtexture(this, "images/altimetry.png");
+        this.appearance.setTexture(this.texture);
+        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+
+        this.shader = new CGFshader(this.gl, "terrain.vert", "terrain.frag");
+        this.shader.setUniformsValues({ uSampler2: 1 });
+        this.shader.setUniformsValues({ timeFactor: 0 });
+
+        // shader code panels references
+        this.shadersDiv = document.getElementById("shaders");
+        this.vShaderDiv = document.getElementById("vshader");
+        this.fShaderDiv = document.getElementById("fshader");
 
         //Bird
         this.bird = new MyBird(this);
@@ -132,13 +153,18 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
         // ---- BEGIN Primitive drawing section
+        this.appearance.apply();
+        this.setActiveShader(this.shader);
         this.pushMatrix();
+        this.heightmap.bind(1);
+        //Uncomment following lines in case texture must have wrapping mode 'REPEAT'
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
+        
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         if (this.displayPlane){
-            this.pushMatrix();
             this.terrain.display();
-            this.popMatrix();
         }
         this.popMatrix();
         // ---- END Primitive drawing section
