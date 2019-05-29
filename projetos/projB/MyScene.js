@@ -24,6 +24,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
+        this.lightning = new MyLightning(this);
 
         this.appearance = new CGFappearance(this);
         this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
@@ -42,6 +43,9 @@ class MyScene extends CGFscene {
         this.shader.setUniformsValues({ uSampler2: 1 });
         this.shader.setUniformsValues({ timeFactor: 0 });
 
+        this.shaderBird = new CGFshader(this.gl, "bird.vert", "bird.frag");
+        this.shaderBird.setUniformsValues({ timeFactor: 0 });
+
         // shader code panels references
         this.shadersDiv = document.getElementById("shaders");
         this.vShaderDiv = document.getElementById("vshader");
@@ -54,8 +58,32 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayBird = true;
         this.displayPlane = true;
+        this.displayLightning = false;
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+        this.axiom = "X"; // "X"; //
+        this.ruleF = "FF"; // "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 25.0;
+        this.iterations = 4;
+        this.LightScale = 0.5;
+ 
+        this.doGenerate = function () {
+            this.lightning.generate(
+                this.axiom,
+                {
+                    "F": ["FF"],
+                    "X": ["F[-X][X]F[-X]+X", "F[-X][X]+X", "F[+X]-X", "F[/X][X]F['\''\'X]+X", "F['\'X][X]/X", "F[/X]'\'X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X"]
+                },
+                this.angle,
+                this.iterations,
+                this.LightScale
+            );
+        }
+
+        // do initial generation
+        this.doGenerate();
 
 
         // set the scene update period 
@@ -92,6 +120,8 @@ class MyScene extends CGFscene {
         else if (this.gui.isKeyPressed("KeyA")) {
             this.bird.update(t, this.speedFactor, "A");
         }
+        //bird
+        this.shaderBird.setUniformsValues({timefactor: t / 100 % 1000});
     }
     convertAng(ang) {
         return (Math.PI * ang / 180);
@@ -146,6 +176,7 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
+        this.setActiveShader(this.shaderBird);
         // Display objs
         if (this.displayBird) {
             this.pushMatrix();
@@ -167,6 +198,9 @@ class MyScene extends CGFscene {
             this.terrain.display();
         }
         this.popMatrix();
+
+        if(this.displayLightning)
+            this.lightning.display();
         // ---- END Primitive drawing section
 
         this.setActiveShader(this.defaultShader);
