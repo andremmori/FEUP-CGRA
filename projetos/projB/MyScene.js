@@ -19,7 +19,7 @@ class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
-       
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
@@ -33,8 +33,8 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayBird = true;
-        this.displayPlane = true;
-        this.displayTerrain = false;
+        this.displayPlane = false;
+        this.displayTerrain = true;
         this.displayLightning = false;
         this.scaleFactor = 1;
         this.speedFactor = 1;
@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
         this.angle = 25.0;
         this.iterations = 4;
         this.LightScale = 0.5;
- 
+
         this.doGenerate = function () {
             this.lightning.generate(
                 this.axiom,
@@ -145,11 +145,10 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Scale
-        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
-            0.0, this.scaleFactor, 0.0, 0.0,
-            0.0, 0.0, this.scaleFactor, 0.0,
-            0.0, 0.0, 0.0, 1.0];
-        this.multMatrix(sca);
+        // var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
+        //     0.0, this.scaleFactor, 0.0, 0.0,
+        //     0.0, 0.0, this.scaleFactor, 0.0,
+        //     0.0, 0.0, 0.0, 1.0];
 
         // Draw axis
         if (this.displayAxis)
@@ -161,21 +160,22 @@ class MyScene extends CGFscene {
         // Display objs
         if (this.displayBird) {
             this.pushMatrix();
+            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             this.bird.display();
             this.popMatrix();
         }
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();        
+        this.pushMatrix();
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        if (this.displayPlane){
+        if (this.displayPlane) {
             this.plane.display();
         }
         this.popMatrix();
 
-        if(this.displayLightning)
+        if (this.displayLightning)
             this.lightning.display();
-        
+
         if (this.displayTerrain)
             this.terrain.display();
         // ---- END Primitive drawing section
