@@ -21,9 +21,14 @@ class MyTerrain extends CGFobject {
         this.appearance.setTexture(this.texture);
         this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
+        // shader code panels references
+        this.shadersDiv = document.getElementById("shaders");
+        this.vShaderDiv = document.getElementById("vshader");
+        this.fShaderDiv = document.getElementById("fshader");
+
 
         this.shader = new CGFshader(this.scene.gl, "terrain.vert", "terrain.frag");
-        this.shader.setUniformsValues({ uSampler2: 1 });
+        this.shader.setUniformsValues({  uSampler2: 1 });
 
         
         this.initBuffers();
@@ -31,14 +36,15 @@ class MyTerrain extends CGFobject {
     initBuffers() {
     }
     display(){
-        this.scene.setActiveShader(this.shader);
         this.appearance.setTexture(this.texture);
         this.appearance.apply();
-        this.heightmap.bind(1);
         this.scene.pushMatrix();
+        this.heightmap.bind(1);
+        this.scene.setActiveShader(this.shader);
         this.scene.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scene.scale(60, 60, 1);
         this.plane.display();
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
     }
 }

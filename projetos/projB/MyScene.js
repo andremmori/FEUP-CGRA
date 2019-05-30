@@ -179,7 +179,5 @@ class MyScene extends CGFscene {
         if (this.displayTerrain)
             this.terrain.display();
         // ---- END Primitive drawing section
-
-        this.setActiveShader(this.defaultShader);
     }
 }
