@@ -25,39 +25,16 @@ class MyScene extends CGFscene {
         this.plane = new Plane(this, 32);
         this.terrain = new MyTerrain(this);
         this.lightning = new MyLightning(this);
-
-        this.appearance = new CGFappearance(this);
-        this.appearance.setAmbient(0.3, 0.3, 0.3, 1);
-        this.appearance.setDiffuse(0.7, 0.7, 0.7, 1);
-        this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
-        this.appearance.setShininess(120);
-
-        this.texture = new CGFtexture(this, "images/terrain.jpg");
-        this.heightmap = new CGFtexture(this, "images/heightmap.jpg");
-        this.altimetry = new CGFtexture(this, "images/altimetry.png");
-        this.appearance.setTexture(this.texture);
-        this.appearance.setTextureWrap('REPEAT', 'REPEAT');
-
-
-        this.shader = new CGFshader(this.gl, "terrain.vert", "terrain.frag");
-        this.shader.setUniformsValues({ uSampler2: 1 });
-        this.shader.setUniformsValues({ timeFactor: 0 });
-
-        this.shaderBird = new CGFshader(this.gl, "bird.vert", "bird.frag");
-        this.shaderBird.setUniformsValues({ timeFactor: 0 });
-
-        // shader code panels references
-        this.shadersDiv = document.getElementById("shaders");
-        this.vShaderDiv = document.getElementById("vshader");
-        this.fShaderDiv = document.getElementById("fshader");
-
         //Bird
         this.bird = new MyBird(this);
+
+
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayBird = true;
         this.displayPlane = true;
+        this.displayTerrain = false;
         this.displayLightning = false;
         this.scaleFactor = 1;
         this.speedFactor = 1;
@@ -109,19 +86,20 @@ class MyScene extends CGFscene {
     update(t) {
         this.checkKeys();
         if (this.gui.isKeyPressed("KeyW")) {
-            this.bird.update(t, this.speedFactor, "W");
+            this.bird.update(this.speedFactor, "W");
         }
         else if (this.gui.isKeyPressed("KeyS")) {
-            this.bird.update(t, this.speedFactor, "S");
+            this.bird.update(this.speedFactor, "S");
         }
         else if (this.gui.isKeyPressed("KeyD")) {
-            this.bird.update(t, this.speedFactor, "D");
+            this.bird.update(this.speedFactor, "D");
         }
         else if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.update(t, this.speedFactor, "A");
+            this.bird.update(this.speedFactor, "A");
         }
-        //bird
-        this.shaderBird.setUniformsValues({timefactor: t / 100 % 1000});
+        else if (this.gui.isKeyPressed("KeyR")) {
+            this.bird.update(this.speedFactor, "R");
+        }
     }
     convertAng(ang) {
         return (Math.PI * ang / 180);
@@ -145,6 +123,10 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyD")) {
             text += " D ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " R ";
             keysPressed = true;
         }
         if (keysPressed)
@@ -176,7 +158,6 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
-        this.setActiveShader(this.shaderBird);
         // Display objs
         if (this.displayBird) {
             this.pushMatrix();
@@ -184,23 +165,19 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
         // ---- BEGIN Primitive drawing section
-        this.appearance.apply();
-        this.setActiveShader(this.shader);
-        this.pushMatrix();
-        this.heightmap.bind(1);
-        //Uncomment following lines in case texture must have wrapping mode 'REPEAT'
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
-        
+        this.pushMatrix();        
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         if (this.displayPlane){
-            this.terrain.display();
+            this.plane.display();
         }
         this.popMatrix();
 
         if(this.displayLightning)
             this.lightning.display();
+        
+        if (this.displayTerrain)
+            this.terrain.display();
         // ---- END Primitive drawing section
 
         this.setActiveShader(this.defaultShader);

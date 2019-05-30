@@ -7,7 +7,7 @@ class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
         this.orientacao = 0;
-        this.velocidade = 1;
+        this.velocidade = 0;
         this.x = 0;
         this.y = 3;
         this.z = 0;
@@ -36,6 +36,11 @@ class MyBird extends CGFobject {
         this.bicoColor.setSpecular(0.835, 0.623, 0, 1);
         this.bicoColor.setShininess(50.0);
 
+        //this.shaderBird = new CGFshader(this.gl, "bird.vert", "bird.frag");
+        //this.shaderBird.setUniformsValues({ timeFactor: 0 });
+        //this.shaderBird.setUniformsValues({timefactor: t / 100 % 1000});
+
+
     }
     convertAng(ang) {
         return (Math.PI * ang / 180);
@@ -43,6 +48,8 @@ class MyBird extends CGFobject {
 
     display() {
        
+        //this.setActiveShader(this.shaderBird);
+
         this.movement();
         // Corpo
         this.scene.pushMatrix();
@@ -179,14 +186,14 @@ class MyBird extends CGFobject {
         this.prism.disableNormalViz();
     }
 
-    update(timeFactor, speedFactor, direction){
+    update(speedFactor, direction){
         this.velocidade = this.scene.speedFactor;
         if(direction == "W"){
             this.accelerate(0.1);
         }
 
         if (direction == "S") {
-            if(this.velocidade > 0.2)
+            if(this.velocidade > 0.1)
                 this.accelerate(-0.1);            
         }
 
@@ -197,6 +204,15 @@ class MyBird extends CGFobject {
         if (direction == "D") {
             this.turn(-1 * (speedFactor));                
         }
+
+        if (direction == "R") {
+            this.orientacao = 0;
+            this.velocidade = 0;
+            this.x = 0;
+            this.y = 3;
+            this.z = 0;
+        }
+
 
     }
 
