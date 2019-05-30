@@ -8,6 +8,7 @@ class MyBird extends CGFobject {
         super(scene);
         this.orientacao = 0;
         this.velocidade = 0;
+        this.wingTime = 0;
         this.x = 0;
         this.y = 3;
         this.z = 0;
@@ -17,6 +18,8 @@ class MyBird extends CGFobject {
         this.tail = new MyCylinder(this.scene, 7, 2);
         this.sobs = new MyQuad(this.scene);
         this.triangle = new MyTriangleSmall(this.scene);
+        this.wingL = new MyWing(this.scene, -2, -2.9, -90);
+        this.wingR = new MyWing(this.scene, 2, 2.8, 90);
 
         this.olhoColor = new CGFappearance(this.scene);
         this.olhoColor.setAmbient(0, 0, 0, 1);
@@ -43,18 +46,32 @@ class MyBird extends CGFobject {
 
     display() {
         this.movement();
-        // Corpo
+        //Asa esquerda
         this.scene.pushMatrix();
+        this.scene.translate(0,6,0);
+        this.scene.rotate(-this.wingTime, 1,0,0);
+        this.birdColor.apply();
+        this.wingL.display();
+        this.scene.popMatrix();
         
+        //Asa Direita
+        this.scene.pushMatrix();
+        this.scene.translate(0, 6, 0);
+        this.scene.rotate(this.wingTime, 1, 0, 0);
+        this.birdColor.apply();
+        this.wingR.display();
+        this.scene.popMatrix();
+
+        // Corpo
+        this.scene.pushMatrix();        
         this.scene.translate(0, this.y+3, 0);
-        this.scene.scale(2, 2, 2);
+        this.scene.scale(2, 2.5, 2);
         this.birdColor.apply();
         this.cubo.display();
         this.scene.popMatrix();
 
         // Cabeca
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 1.5, this.y+ 4.25, 0);
         this.scene.scale(2, 2, 2);
         this.birdColor.apply();
@@ -63,7 +80,6 @@ class MyBird extends CGFobject {
 
         // 
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 2.5, this.y + 5, 0+0.25);
         this.scene.rotate(this.convertAng(-30), 1, 0, 0);
         this.scene.scale(0.6, 0.1, 0.6);
@@ -72,7 +88,6 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 2.5, this.y + 5, 0 - 0.25);
         this.scene.rotate(this.convertAng(30), 1, 0, 0);
         this.scene.scale(0.6, 0.1, 0.6);
@@ -84,7 +99,6 @@ class MyBird extends CGFobject {
         // Olhos
         // Dir
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 2.5, this.y+4.5, 0+0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.olhoColor.apply();
@@ -92,7 +106,6 @@ class MyBird extends CGFobject {
         this.scene.popMatrix();
         // Esq
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 2.5, this.y + 4.5, 0 - 0.5);
         this.scene.scale(0.3, 0.3, 0.3);
         this.olhoColor.apply();
@@ -101,7 +114,6 @@ class MyBird extends CGFobject {
 
         // Bico
         this.scene.pushMatrix();
-        
         this.scene.translate(0 + 2.5, this.y+4, 0);
         this.scene.rotate(this.convertAng(-90), 0, 0, 1);
         this.scene.scale(0.3, 0.3, 0.3);
@@ -111,7 +123,6 @@ class MyBird extends CGFobject {
 
         // Calda
         this.scene.pushMatrix();
-        
         this.scene.translate(0 - 1, this.y + 3.5, 0);
         this.scene.rotate(this.convertAng(60), 0, 0, 1);
         this.scene.scale(0.25, 1, 0.25);
@@ -119,52 +130,13 @@ class MyBird extends CGFobject {
         this.tail.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        
+        this.scene.pushMatrix();        
         this.scene.translate(0 - 1, this.y + 3.5, 0);
         this.scene.rotate(this.convertAng(115), 0, 0, 1);
         this.scene.scale(0.25, 1, 0.25);
         this.birdColor.apply();
         this.tail.display();
         this.scene.popMatrix();
-
-        // Asa
-        this.scene.pushMatrix();
-        
-        this.scene.translate(0, this.y+3, 0-2);
-        this.scene.rotate(this.convertAng(15), 1, 0, 0);
-        this.scene.scale(2, 0, 2);
-        this.birdColor.apply();
-        this.cubo.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        
-        this.scene.translate(0, this.y + 3, 0+2);
-        this.scene.rotate(this.convertAng(-15), 1, 0, 0);
-        this.scene.scale(2, 0, 2);
-        this.birdColor.apply();
-        this.cubo.display();
-        this.scene.popMatrix();
-        //triangulos
-        this.scene.pushMatrix();
-        
-        this.scene.translate(0, this.y + 3.25, 0-3);
-        this.scene.rotate(this.convertAng(-60), 1, 0, 0);
-        this.scene.scale(1, 1, 1);
-        this.birdColor.apply();
-        this.triangle.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        
-        this.scene.translate(0, this.y + 3.25, 0 + 3);
-        this.scene.rotate(this.convertAng(60), 1, 0, 0);
-        this.scene.scale(1, 1, 1);
-        this.birdColor.apply();
-        this.triangle.display();
-        this.scene.popMatrix();
-
     }
 
     enableNormalViz() {
@@ -200,13 +172,13 @@ class MyBird extends CGFobject {
 
         if (direction == "R") {
             this.orientacao = 0;
+            this.scene.speedFactor = 1;
             this.velocidade = 0;
-            this.scene.speedFactor = 0;
             this.x = 0;
             this.y = 3;
             this.z = 0;
+            this.wingTime = 0;
         }
-
 
     }
 
@@ -215,8 +187,11 @@ class MyBird extends CGFobject {
     }
 
     accelerate(v){
-        this.velocidade += v;
-        this.scene.speedFactor += v; 
+        if ((this.velocidade <= 3 && this.scene.speedFactor <= 3) && (this.velocidade >= 0 && this.scene.speedFactor >= 0.1))
+        {
+            this.velocidade += v;
+            this.scene.speedFactor += v; 
+        }
     }
 
     movement(){
@@ -225,8 +200,11 @@ class MyBird extends CGFobject {
     }
 
     animation(timeFactor){
-        this.scene.translate(0, (this.y += Math.sin(timeFactor/100%1000)/15*this.scene.speedFactor), 0)
-
+        this.scene.translate(0, (this.y += Math.sin(timeFactor/100%1000)/15), 0)
+        if(this.velocidade != 0)
+            this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.velocidade;
+        else
+            this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.scene.speedFactor;
     }
 }
 
