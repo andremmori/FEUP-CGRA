@@ -36,7 +36,7 @@ class MyBird extends CGFobject {
         this.bicoColor.setSpecular(0.835, 0.623, 0, 1);
         this.bicoColor.setShininess(50.0);
 
-        //this.shaderBird = new CGFshader(this.gl, "bird.vert", "bird.frag");
+        //this.shaderBird = new CGFshader(this.gl, "shaders/bird.vert", "shaders/bird.frag");
         //this.shaderBird.setUniformsValues({ timeFactor: 0 });
         //this.shaderBird.setUniformsValues({timefactor: t / 100 % 1000});
 
