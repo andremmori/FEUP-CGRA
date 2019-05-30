@@ -208,6 +208,7 @@ class MyBird extends CGFobject {
         if (direction == "R") {
             this.orientacao = 0;
             this.velocidade = 0;
+            this.scene.speedFactor = 0;
             this.x = 0;
             this.y = 3;
             this.z = 0;
