@@ -8,6 +8,7 @@ uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
 uniform sampler2D uSampler2;
+varying vec2 pos;
 
 float normScale=.5;
 
@@ -18,4 +19,5 @@ void main(){
     offset=aVertexNormal*12.*texture2D(uSampler2,vTextureCoord).r;
     
     gl_Position=uPMatrix*uMVMatrix*vec4(aVertexPosition+offset,1.);
+    pos = aTextureCoord;
 }

@@ -6,12 +6,14 @@ varying vec2 vTextureCoord;
 
 uniform sampler2D uSampler;
 uniform sampler2D uSampler2;
+uniform sampler2D uSampler3;
 
 void main(){
-    vec4 color=texture2D(uSampler,vTextureCoord+vec2(0.01,0.));
-    vec4 filter=texture2D(uSampler2,vTextureCoord+vec2(0.,.1));
-    
-    color=vec4(color.r-.2*filter.r,color.g-.2*filter.g,color.b-.2*filter.b,1.);
+    vec4 filter=texture2D(uSampler2,vTextureCoord);
+
+    vec2 position=(vec2(1.-filter.y,1.-filter.x));
+
+    vec4 color=texture2D(uSampler3,position);
     
     gl_FragColor=color;
 }
