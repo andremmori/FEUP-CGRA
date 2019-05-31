@@ -62,6 +62,29 @@ class MyScene extends CGFscene {
         // do initial generation
         this.doGenerate();
 
+        this.axiomT = "+++X"; // "X"; //
+        this.ruleFT = "FF"; // "FF"; //
+        this.ruleXT = "F[-X][X]F[-X]+FX";
+        this.angleT = 30.0;
+        this.iterationsT = 4;
+        this.scaleFactorT = 0.5;
+        //this.lSystem = new MyLSystem(this);
+        this.plant = new MyLSPlant(this);
+
+        this.doGenerate2 = function () {
+            this.plant.generate(
+                this.axiom,
+                {
+                    "F": ["FF"],
+                    "X": ["F[-X][X]F[-X]+X", "F[-X][X]+X", "F[+X]-X", "F[/X][X]F['\''\'X]+X", "F['\'X][X]/X", "F[/X]'\'X", "F[^X][X]F[&X]^X", "F[^X]&X", "F[&X]^X"]
+                },
+                this.angleT,
+                this.iterationsT,
+                this.scaleFactorT
+            );
+        }
+
+        this.doGenerate2();
 
         // set the scene update period 
         // (to invoke the update() method every 50ms or as close as possible to that )
