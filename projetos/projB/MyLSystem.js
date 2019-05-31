@@ -76,7 +76,7 @@ class MyLSystem extends CGFobject {
 
     display(){
         this.scene.pushMatrix();
-        this.scene.scale(this.scale, this.scale, this.scale);
+        //this.scene.scale(this.scale, this.scale, this.scale);
 
         var i;
 

@@ -18,8 +18,8 @@ class MyBird extends CGFobject {
         this.tail = new MyCylinder(this.scene, 7, 2);
         this.sobs = new MyQuad(this.scene);
         this.triangle = new MyTriangleSmall(this.scene);
-        this.wingL = new MyWing(this.scene, -2, -2.9, -90);
-        this.wingR = new MyWing(this.scene, 2, 2.8, 90);
+        this.wingL = new MyWing(this.scene, -2, -2.9, -60);
+        this.wingR = new MyWing(this.scene, 2, 2.8, 60);
 
         this.olhoColor = new CGFappearance(this.scene);
         this.olhoColor.setAmbient(0, 0, 0, 1);

@@ -43,7 +43,7 @@ class MyScene extends CGFscene {
         this.ruleF = "FF"; // "FF"; //
         this.ruleX = "F[-X][X]F[-X]+FX";
         this.angle = 25.0;
-        this.iterations = 4;
+        this.iterations = 3;
         this.LightScale = 0.5;
 
         this.doGenerate = function () {
@@ -101,6 +101,9 @@ class MyScene extends CGFscene {
         else if (this.gui.isKeyPressed("KeyR")) {
             this.bird.update(this.speedFactor, "R");
         }
+        else if(this.gui.isKeyPressed("KeyL")){
+            this.lightning.update(t);
+        }
     }
     convertAng(ang) {
         return (Math.PI * ang / 180);
@@ -128,6 +131,10 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyR")) {
             text += " R ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyL")) {
+            text += " L ";
             keysPressed = true;
         }
         if (keysPressed)
@@ -175,7 +182,7 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         if (this.displayLightning)
-            this.lightning.display();
+            this.lightning.display2();
 
         if (this.displayTerrain)
             this.terrain.display();
