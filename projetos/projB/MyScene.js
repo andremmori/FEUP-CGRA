@@ -42,6 +42,9 @@ class MyScene extends CGFscene {
         this.gold.setShininess(0.4);
         this.house = new MyHouse(this, 'images/HouseWall.jpg', 'images/HouseDoor.jpg', this.stone, this.gold);
 
+        this.cubeDay = new MyCubeMap(this, 'images/lake1_up.jpg', 'images/lake1_dn.jpg', 'images/lake1_rt.jpg', 'images/lake1_lf.jpg', 'images/lake1_ft.jpg', 'images/lake1_bk.jpg');
+
+
         // Branch
         this.branch1 = new MyTreeBranch(this, 9, 5, 0);
         this.branch2 = new MyTreeBranch(this, -2, 5, 3);
@@ -235,6 +238,13 @@ class MyScene extends CGFscene {
         //Apply default appearance
         this.setDefaultAppearance();
 
+
+        //Display skybox
+        this.pushMatrix();
+        this.scale(200, 200, 200);
+        this.cubeDay.display();
+        this.popMatrix();
+
         // Display objs
         if (this.displayBird) {
             this.pushMatrix();
@@ -283,6 +293,17 @@ class MyScene extends CGFscene {
         if(this.displayBranch4)
             this.branch4.display();
         
+        this.pushMatrix();
+        this.translate(-3,3.5,0);
+        this.scale(0.5,0.5,0.5);
+        this.plant.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(0, 3.5, -3);
+        this.scale(0.5, 0.5, 0.5);
+        this.plant.display();
+        this.popMatrix();
 
 
         // ---- END Primitive drawing section
