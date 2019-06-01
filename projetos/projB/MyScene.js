@@ -35,8 +35,6 @@ class MyScene extends CGFscene {
         this.stone.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
         this.stone.setShininess(38.4);
 
-        // Branch
-        this.branch = new MyTreeBranch(this);
         this.gold = new CGFappearance(this);
         this.gold.setAmbient(0.24725, 0.1995, 0.0745);
         this.gold.setDiffuse(0.75164, 0.60648, 0.22648);
@@ -44,6 +42,11 @@ class MyScene extends CGFscene {
         this.gold.setShininess(0.4);
         this.house = new MyHouse(this, 'images/HouseWall.jpg', 'images/HouseDoor.jpg', this.stone, this.gold);
 
+        // Branch
+        this.branch1 = new MyTreeBranch(this, 9, 5, 0);
+        this.branch2 = new MyTreeBranch(this, 12, 5, 0);
+        this.branch3 = new MyTreeBranch(this, 15, 5, 0);
+        this.branch4 = new MyTreeBranch(this, 18, 5, 0);
 
         // Nest
         this.nest = new MyNest(this);
@@ -125,26 +128,44 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t) {
-        this.bird.animation(t);
         this.checkKeys();
         if (this.gui.isKeyPressed("KeyW")) {
-            this.bird.update(this.speedFactor, "W");
+            this.bird.animation(t,"");
+
+            this.bird.update(t,this.speedFactor, "W");
         }
         else if (this.gui.isKeyPressed("KeyS")) {
-            this.bird.update(this.speedFactor, "S");
+            this.bird.animation(t, "");
+
+            this.bird.update(t,this.speedFactor, "S");
         }
         else if (this.gui.isKeyPressed("KeyD")) {
-            this.bird.update(this.speedFactor, "D");
+            this.bird.animation(t,"");
+
+            this.bird.update(t,this.speedFactor, "D");
         }
         else if (this.gui.isKeyPressed("KeyA")) {
-            this.bird.update(this.speedFactor, "A");
+            this.bird.animation(t,"");
+
+            this.bird.update(t,this.speedFactor, "A");
         }
         else if (this.gui.isKeyPressed("KeyR")) {
-            this.bird.update(this.speedFactor, "R");
+            this.bird.animation(t,"");
+
+            this.bird.update(t,this.speedFactor, "R");
         }
         else if (this.gui.isKeyPressed("KeyL")) {
+            this.bird.animation(t,"");
+
             this.lightning.update(t);
         }
+        else if(this.gui.isKeyPressed("KeyP")){
+            this.bird.animation(t, "P");
+
+            this.bird.update(t,this.speedFactor, "P");
+        }
+        else 
+            this.bird.animation(t, "");
     }
     convertAng(ang) {
         return (Math.PI * ang / 180);
@@ -176,6 +197,10 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyL")) {
             text += " L ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyP")) {
+            text += " P ";
             keysPressed = true;
         }
         if (keysPressed)
@@ -243,21 +268,16 @@ class MyScene extends CGFscene {
 
         // Branches
         this.pushMatrix();
-        this.translate(9, 5, 0);
-        this.branch.display();
+        this.branch1.display();
+
+        this.branch2.display();
+
+        this.branch3.display();
+
+        this.branch4.display();
         this.popMatrix();
-        this.pushMatrix();
-        this.translate(12, 5, 0);
-        this.branch.display();
-        this.popMatrix();
-        this.pushMatrix();
-        this.translate(15, 5, 0);
-        this.branch.display();
-        this.popMatrix();
-        this.pushMatrix();
-        this.translate(18, 5, 0);
-        this.branch.display();
-        this.popMatrix();
+
+
         // ---- END Primitive drawing section
     }
 }

@@ -12,6 +12,10 @@ class MyBird extends CGFobject {
         this.x = 0;
         this.y = 3;
         this.z = 0;
+        this.isDown = false;
+        this.time;
+        this.delta;
+
 
         this.cubo = new MyUnitCube(this.scene);
         this.bico = new MyPyramid(this.scene, 4, 2);
@@ -48,7 +52,7 @@ class MyBird extends CGFobject {
         this.movement();
         //Asa esquerda
         this.scene.pushMatrix();
-        this.scene.translate(0, 6, 0);
+        this.scene.translate(0, this.y+3, 0);
         this.scene.rotate(-this.wingTime, 1, 0, 0);
         this.birdColor.apply();
         this.wingL.display();
@@ -56,7 +60,7 @@ class MyBird extends CGFobject {
 
         //Asa Direita
         this.scene.pushMatrix();
-        this.scene.translate(0, 6, 0);
+        this.scene.translate(0, this.y+3, 0);
         this.scene.rotate(this.wingTime, 1, 0, 0);
         this.birdColor.apply();
         this.wingR.display();
@@ -150,8 +154,7 @@ class MyBird extends CGFobject {
         this.prism.disableNormalViz();
     }
 
-    update(speedFactor, direction) {
-
+    update(timeFactor, speedFactor, direction) {
         this.velocidade = this.scene.speedFactor;
         if (direction == "W") {
             if (this.velocidade < 3.0)
@@ -180,7 +183,6 @@ class MyBird extends CGFobject {
             this.z = 0;
             this.wingTime = 0;
         }
-
     }
 
     turn(v) {
@@ -196,14 +198,35 @@ class MyBird extends CGFobject {
     movement() {
         this.scene.translate((this.x += Math.cos(-this.orientacao) * this.velocidade * 0.1), 0, (this.z += Math.sin(-this.orientacao) * this.velocidade * 0.1));
         this.scene.rotate(this.orientacao, 0, 1, 0);
+        if(this.isDown)
+        {
+            if (this.time - this.delta <= 1000)
+                this.scene.translate(0, this.y -= 0.1, 0);
+            else if (this.time - this.delta <= 2000)
+                this.scene.translate(0, this.y += 0.1, 0);
+            else
+                this.isDown = false;
+        }
     }
 
-    animation(timeFactor) {
+    animation(timeFactor, direction) {
+        this.time = timeFactor;
         this.scene.translate(0, (this.y += Math.sin(timeFactor / 100 % 1000) / 15), 0)
         if (this.velocidade != 0)
             this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.velocidade;
         else
             this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.scene.speedFactor;
+        if (direction == "P")
+            this.down();
     }
+
+    down(){
+        if(!this.isDown){
+            this.delta = this.time;
+        }
+        this.isDown = true;
+
+    }
+
 }
 

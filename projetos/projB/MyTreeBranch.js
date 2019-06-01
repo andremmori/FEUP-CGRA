@@ -4,7 +4,7 @@
  * @param scene - Reference to MyScene object
  */
 class MyTreeBranch extends CGFobject {
-    constructor(scene) {
+    constructor(scene, x, y, z) {
         super(scene);
         this.cyl = new MyCylinder(this.scene, 6, 2);
 
@@ -18,10 +18,15 @@ class MyTreeBranch extends CGFobject {
         this.wood = new CGFappearance(this.scene);
         this.wood.loadTexture('images/treeTrunk.jpg');
         this.wood.setTextureWrap('REPEAT', 'REPEAT');
+        
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     display() {
         this.scene.pushMatrix();
+        this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.scene.convertAng(90), 1, 0, 0);
         this.scene.scale(0.25, 5, 0.25);
         this.material.apply();
