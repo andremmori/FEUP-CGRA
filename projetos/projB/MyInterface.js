@@ -18,6 +18,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayPlane').name("Display Plane");
         this.gui.add(this.scene, 'displayLightning').name("Display Light");
         this.gui.add(this.scene, 'displayTerrain').name("Display Terrain");
+        this.gui.add(this.scene, 'displayHouse').name("Display House");
 
         // Sliders
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');

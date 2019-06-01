@@ -28,14 +28,32 @@ class MyScene extends CGFscene {
         //Bird
         this.bird = new MyBird(this);
 
+        // House
+        this.stone = new CGFappearance(this);
+        this.stone.setAmbient(0.05375, 0.05, 0.06625, 0.82);
+        this.stone.setDiffuse(0.18275, 0.17, 0.22525, 0.82);
+        this.stone.setSpecular(0.332741, 0.328634, 0.346435, 0.82);
+        this.stone.setShininess(38.4);
+
+        // Branch
+        this.branch = new MyTreeBranch(this);
+        this.gold = new CGFappearance(this);
+        this.gold.setAmbient(0.24725, 0.1995, 0.0745);
+        this.gold.setDiffuse(0.75164, 0.60648, 0.22648);
+        this.gold.setSpecular(0.628281, 0.555802, 0.366065);
+        this.gold.setShininess(0.4);
+        this.house = new MyHouse(this, 'images/HouseWall.jpg', 'images/HouseDoor.jpg', this.stone, this.gold);
 
 
+        // Nest
+        this.nest = new MyNest(this);
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayBird = true;
         this.displayPlane = false;
         this.displayTerrain = true;
         this.displayLightning = false;
+        this.displayHouse = true;
         this.scaleFactor = 1;
         this.speedFactor = 1;
 
@@ -124,7 +142,7 @@ class MyScene extends CGFscene {
         else if (this.gui.isKeyPressed("KeyR")) {
             this.bird.update(this.speedFactor, "R");
         }
-        else if(this.gui.isKeyPressed("KeyL")){
+        else if (this.gui.isKeyPressed("KeyL")) {
             this.lightning.update(t);
         }
     }
@@ -191,7 +209,8 @@ class MyScene extends CGFscene {
         // Display objs
         if (this.displayBird) {
             this.pushMatrix();
-            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+            this.translate(0,6,0);
+            this.scale(0.5 * this.scaleFactor, 0.5 * this.scaleFactor, 0.5 *this.scaleFactor);
             this.bird.display();
             this.popMatrix();
         }
@@ -209,6 +228,36 @@ class MyScene extends CGFscene {
 
         if (this.displayTerrain)
             this.terrain.display();
+
+        if (this.displayHouse) {
+            this.pushMatrix();
+            this.translate(0,4.5,0);
+            this.house.display();
+            this.popMatrix();
+        }
+        // Nest
+        this.pushMatrix();
+        this.translate(0,0,-7);
+        this.nest.display();
+        this.popMatrix();
+
+        // Branches
+        this.pushMatrix();
+        this.translate(9, 5, 0);
+        this.branch.display();
+        this.popMatrix();
+        this.pushMatrix();
+        this.translate(12, 5, 0);
+        this.branch.display();
+        this.popMatrix();
+        this.pushMatrix();
+        this.translate(15, 5, 0);
+        this.branch.display();
+        this.popMatrix();
+        this.pushMatrix();
+        this.translate(18, 5, 0);
+        this.branch.display();
+        this.popMatrix();
         // ---- END Primitive drawing section
     }
 }
