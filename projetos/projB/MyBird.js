@@ -217,23 +217,23 @@ class MyBird extends CGFobject {
             if (this.hasBranch == 0) {
                 if (this.scene.displayBranch1) {
                     if (Math.abs(this.x - this.scene.branch1.x) <= 5)
-                        if (Math.abs(this.z - this.scene.branch1.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z+6)) <= 5) {
+                        if (Math.abs(this.z - this.scene.branch1.z) <= 5 || Math.abs(this.z - (this.scene.branch1.z+6)) <= 5) {
                             this.hasBranch = 1;
                             this.scene.displayBranch1 = false;
                             return;
                         }
                 }
 
-                else if (this.scene.displayBranch2) {
+                 if (this.scene.displayBranch2) {
                     if (Math.abs(this.x - this.scene.branch2.x) <= 5)
-                        if (Math.abs(this.z - this.scene.branch2.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z + 6)) <= 5) {
+                        if (Math.abs(this.z - this.scene.branch2.z) <= 5 || Math.abs(this.z - (this.scene.branch2.z + 6)) <= 5) {
                             this.hasBranch = 2;
                             this.scene.displayBranch2 = false;
                             return;
                         }
                 }
 
-                else if (this.scene.displayBranch3) {
+                 if (this.scene.displayBranch3) {
                     if (Math.abs(this.x - this.scene.branch3.x) <= 5)
                         if (Math.abs(this.z - this.scene.branch3.z) <= 5 || Math.abs(this.z - (this.scene.branch3.z + 6)) <= 5) {
                             this.hasBranch = 3;
@@ -243,7 +243,7 @@ class MyBird extends CGFobject {
                 }
 
 
-                else if (this.scene.displayBranch4) {
+                 if (this.scene.displayBranch4) {
                     if (Math.abs(this.x - this.scene.branch4.x) <= 5)
                         if (Math.abs(this.z - this.scene.branch4.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z + 6)) <= 5) {
                             this.hasBranch = 4;

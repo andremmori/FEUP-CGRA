@@ -49,7 +49,7 @@ class MyScene extends CGFscene {
         this.branch1 = new MyTreeBranch(this, 9, 5, 0);
         this.branch2 = new MyTreeBranch(this, -2, 5, 3);
         this.branch3 = new MyTreeBranch(this, -9, 5, -5);
-        this.branch4 = new MyTreeBranch(this, 18, 5, 0);
+        this.branch4 = new MyTreeBranch(this, 10, 5, 0);
 
         // Nest
         this.nest = new MyNest(this);
@@ -163,7 +163,7 @@ class MyScene extends CGFscene {
         }
         else if (this.gui.isKeyPressed("KeyL")) {
             this.bird.animation(t,"");
-
+            this.lightning.startAnimation();
             this.lightning.update(t);
         }
         else if(this.gui.isKeyPressed("KeyP")){
@@ -262,8 +262,8 @@ class MyScene extends CGFscene {
         }
         this.popMatrix();
 
-        if (this.displayLightning)
-            this.lightning.display2();
+        if (this.gui.isKeyPressed("KeyL"))
+            this.lightning.display();
 
         if (this.displayTerrain)
             this.terrain.display();
@@ -305,6 +305,23 @@ class MyScene extends CGFscene {
         this.plant.display();
         this.popMatrix();
 
+        this.pushMatrix();
+        this.translate(18, 3.5, 0);
+        this.scale(0.5, 0.5, 0.5);
+        this.plant.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(0, 3.5, -15);
+        this.scale(0.5, 0.5, 0.5);
+        this.plant.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.translate(-18, 3.5, 0);
+        this.scale(0.5, 0.5, 0.5);
+        this.plant.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
