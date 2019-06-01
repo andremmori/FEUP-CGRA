@@ -263,8 +263,14 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         if (this.gui.isKeyPressed("KeyL"))
+        {
+            this.pushMatrix();
+            this.translate(-30, 45, 0);
+            this.rotate(this.convertAng(180), 0, 1, 0);
+            this.rotate(this.convertAng(180), 1, 0, 0);
             this.lightning.display();
-
+            this.popMatrix();
+        }
         if (this.displayTerrain)
             this.terrain.display();
 
@@ -295,30 +301,35 @@ class MyScene extends CGFscene {
         
         this.pushMatrix();
         this.translate(-3,3.5,0);
+        this.rotate(this.convertAng(0), 0, 1, 0);
         this.scale(0.5,0.5,0.5);
         this.plant.display();
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(0, 3.5, -3);
+        this.rotate(this.convertAng(45), 0, 1, 0);
         this.scale(0.5, 0.5, 0.5);
         this.plant.display();
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(18, 3.5, 0);
+        this.rotate(this.convertAng(300), 0, 1, 0);
         this.scale(0.5, 0.5, 0.5);
         this.plant.display();
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(0, 3.5, -15);
+        this.rotate(this.convertAng(80), 0, 1, 0);
         this.scale(0.5, 0.5, 0.5);
         this.plant.display();
         this.popMatrix();
 
         this.pushMatrix();
         this.translate(-18, 3.5, 0);
+        this.rotate(this.convertAng(180), 0, 1, 0);
         this.scale(0.5, 0.5, 0.5);
         this.plant.display();
         this.popMatrix();
