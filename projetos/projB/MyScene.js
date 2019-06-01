@@ -44,8 +44,8 @@ class MyScene extends CGFscene {
 
         // Branch
         this.branch1 = new MyTreeBranch(this, 9, 5, 0);
-        this.branch2 = new MyTreeBranch(this, 12, 5, 0);
-        this.branch3 = new MyTreeBranch(this, 15, 5, 0);
+        this.branch2 = new MyTreeBranch(this, -2, 5, 3);
+        this.branch3 = new MyTreeBranch(this, -9, 5, -5);
         this.branch4 = new MyTreeBranch(this, 18, 5, 0);
 
         // Nest
@@ -59,6 +59,10 @@ class MyScene extends CGFscene {
         this.displayHouse = true;
         this.scaleFactor = 1;
         this.speedFactor = 1;
+        this.displayBranch1 = true;
+        this.displayBranch2 = true;
+        this.displayBranch3 = true;
+        this.displayBranch4 = true;
 
         this.axiom = "X"; // "X"; //
         this.ruleF = "FF"; // "FF"; //
@@ -267,15 +271,18 @@ class MyScene extends CGFscene {
         this.popMatrix();
 
         // Branches
-        this.pushMatrix();
-        this.branch1.display();
+        if(this.displayBranch1)
+            this.branch1.display();
 
-        this.branch2.display();
+        if(this.displayBranch2)
+            this.branch2.display();
 
-        this.branch3.display();
+        if(this.displayBranch3)
+            this.branch3.display();
 
-        this.branch4.display();
-        this.popMatrix();
+        if(this.displayBranch4)
+            this.branch4.display();
+        
 
 
         // ---- END Primitive drawing section

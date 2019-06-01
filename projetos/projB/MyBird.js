@@ -15,6 +15,7 @@ class MyBird extends CGFobject {
         this.isDown = false;
         this.time;
         this.delta;
+        this.hasBranch = 0;
 
 
         this.cubo = new MyUnitCube(this.scene);
@@ -24,7 +25,7 @@ class MyBird extends CGFobject {
         this.triangle = new MyTriangleSmall(this.scene);
         this.wingL = new MyWing(this.scene, -2, -2.9, -60);
         this.wingR = new MyWing(this.scene, 2, 2.8, 60);
-
+        this.branch = new MyTreeBranch(this.scene, 0, 0, 0);
         this.olhoColor = new CGFappearance(this.scene);
         this.olhoColor.setAmbient(0, 0, 0, 1);
         this.olhoColor.setDiffuse(0, 0, 0, 1);
@@ -50,9 +51,16 @@ class MyBird extends CGFobject {
 
     display() {
         this.movement();
+
+        if (this.hasBranch) {
+            this.scene.pushMatrix();
+            this.scene.translate(2.5, this.y + 4, 0);
+            this.branch.display();
+            this.scene.popMatrix();
+        }
         //Asa esquerda
         this.scene.pushMatrix();
-        this.scene.translate(0, this.y+3, 0);
+        this.scene.translate(0, this.y + 3, 0);
         this.scene.rotate(-this.wingTime, 1, 0, 0);
         this.birdColor.apply();
         this.wingL.display();
@@ -60,7 +68,7 @@ class MyBird extends CGFobject {
 
         //Asa Direita
         this.scene.pushMatrix();
-        this.scene.translate(0, this.y+3, 0);
+        this.scene.translate(0, this.y + 3, 0);
         this.scene.rotate(this.wingTime, 1, 0, 0);
         this.birdColor.apply();
         this.wingR.display();
@@ -198,14 +206,67 @@ class MyBird extends CGFobject {
     movement() {
         this.scene.translate((this.x += Math.cos(-this.orientacao) * this.velocidade * 0.1), 0, (this.z += Math.sin(-this.orientacao) * this.velocidade * 0.1));
         this.scene.rotate(this.orientacao, 0, 1, 0);
-        if(this.isDown)
-        {
+        if (this.isDown) {
             if (this.time - this.delta <= 1000)
-                this.scene.translate(0, this.y -= 0.1, 0);
+                this.scene.translate(0, this.y -= 0.15, 0);
             else if (this.time - this.delta <= 2000)
-                this.scene.translate(0, this.y += 0.1, 0);
+                this.scene.translate(0, this.y += 0.15, 0);
             else
                 this.isDown = false;
+
+            if (this.hasBranch == 0) {
+                if (this.scene.displayBranch1) {
+                    if (Math.abs(this.x - this.scene.branch1.x) <= 5)
+                        if (Math.abs(this.z - this.scene.branch1.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z+6)) <= 5) {
+                            this.hasBranch = 1;
+                            this.scene.displayBranch1 = false;
+                            return;
+                        }
+                }
+
+                else if (this.scene.displayBranch2) {
+                    if (Math.abs(this.x - this.scene.branch2.x) <= 5)
+                        if (Math.abs(this.z - this.scene.branch2.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z + 6)) <= 5) {
+                            this.hasBranch = 2;
+                            this.scene.displayBranch2 = false;
+                            return;
+                        }
+                }
+
+                else if (this.scene.displayBranch3) {
+                    if (Math.abs(this.x - this.scene.branch3.x) <= 5)
+                        if (Math.abs(this.z - this.scene.branch3.z) <= 5 || Math.abs(this.z - (this.scene.branch3.z + 6)) <= 5) {
+                            this.hasBranch = 3;
+                            this.scene.displayBranch3 = false;
+                            return;
+                        }
+                }
+
+
+                else if (this.scene.displayBranch4) {
+                    if (Math.abs(this.x - this.scene.branch4.x) <= 5)
+                        if (Math.abs(this.z - this.scene.branch4.z) <= 5 || Math.abs(this.z - (this.scene.branch4.z + 6)) <= 5) {
+                            this.hasBranch = 4;
+                            this.scene.displayBranch4 = false;
+                            return;
+                        }
+                }
+            }
+            else if (this.scene.gui.isKeyPressed("KeyP") && this.isOnNest()) {
+                if (this.hasBranch == 1) {
+                    this.scene.nest.branch1 = true;
+                }
+                else if (this.hasBranch == 2) {
+                    this.scene.nest.branch2 = true;
+                }
+                else if (this.hasBranch == 3) {
+                    this.scene.nest.branch3 = true;
+                }
+                else if (this.hasBranch == 4) {
+                    this.scene.nest.branch4 = true;
+                }
+                this.hasBranch = 0;
+            }
         }
     }
 
@@ -216,16 +277,24 @@ class MyBird extends CGFobject {
             this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.velocidade;
         else
             this.wingTime = Math.sin(timeFactor / 100 % 1000) / 15 * this.scene.speedFactor;
-        if (direction == "P")
+        if (direction == "P") {
             this.down();
+        }
     }
 
-    down(){
-        if(!this.isDown){
+    down() {
+        if (!this.isDown) {
             this.delta = this.time;
         }
         this.isDown = true;
 
+    }
+
+    isOnNest(){
+        if(Math.abs(this.x - 0.5) <= 3 && Math.abs(this.z - (-18.5)) <= 3)
+            return true;
+
+        return false;
     }
 
 }
