@@ -256,13 +256,13 @@ class MyBird extends CGFobject {
                 if (this.hasBranch == 1) {
                     this.scene.nest.branch1 = true;
                 }
-                else if (this.hasBranch == 2) {
+                if (this.hasBranch == 2) {
                     this.scene.nest.branch2 = true;
                 }
-                else if (this.hasBranch == 3) {
+                if (this.hasBranch == 3) {
                     this.scene.nest.branch3 = true;
                 }
-                else if (this.hasBranch == 4) {
+                if (this.hasBranch == 4) {
                     this.scene.nest.branch4 = true;
                 }
                 this.hasBranch = 0;
