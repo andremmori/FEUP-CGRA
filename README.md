@@ -27,14 +27,14 @@ Screenshots can be found [here](#proj-b) and the source code is found [here](pro
 
 ### Proj. A
 
-![Figure 1](projetos/projA/pics/proja-t2g6-1.png)
-![Figure 2](projetos/projA/pics/proja-t2g6-2.png)
-![Figure 3](projetos/projA/pics/proja-t2g6-3.png)
-![Figure 4](projetos/projA/pics/proja-t2g6-4.png)
-![Figure 5](projetos/projA/pics/proja-t2g6-5.png)
+![Figure 1](projetos/projA/pics/projA-t2g6-1.png)
+![Figure 2](projetos/projA/pics/projA-t2g6-2.png)
+![Figure 3](projetos/projA/pics/projA-t2g6-3.png)
+![Figure 4](projetos/projA/pics/projA-t2g6-4.png)
+![Figure 5](projetos/projA/pics/projA-t2g6-5.png)
 
 ### Proj. B
 
-![Figure 1B](projetos/projB/pics/projb-t2g6-1.png)
-![Figure 2B](projetos/projB/pics/projb-t2g6-2.png)
-![Figure 3B](projetos/projB/pics/projb-t2g6-3.png)
+![Figure 1B](projetos/projB/pics/projB-t2g6-1.png)
+![Figure 2B](projetos/projB/pics/projB-t2g6-2.png)
+![Figure 3B](projetos/projB/pics/projB-t2g6-3.png)
