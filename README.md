@@ -35,6 +35,6 @@ Screenshots can be found [here](#proj-b) and the source code is found [here](pro
 
 ### Proj. B
 
-![Figure 1B](projetos/projB/pics/projB-t2g6-1.png)
+![Figure 1B](projetos/projB/pics/projb-t2g6-1.png)
 ![Figure 2B](projetos/projB/pics/projB-t2g6-2.png)
 ![Figure 3B](projetos/projB/pics/projB-t2g6-3.png)
